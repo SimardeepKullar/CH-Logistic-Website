@@ -9,6 +9,10 @@
     html{scroll-behavior:smooth}
     body{background:var(--white);color:var(--text);font-family:var(--fb);overflow-x:hidden}
 
+    /* ── LOGO ── */
+    .logo-container {width: 250px;}
+    .logo {width: 100%;height: auto;}
+
     /* ── NAV ── */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:100;
