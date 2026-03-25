@@ -200,7 +200,7 @@
     /* ── FOOTER ── */
     footer{background:var(--dark);border-top:3px solid var(--cyan);padding:64px 80px 36px}
     .ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:30px}
-    .ft-logo{height:71px;width:auto;margin-bottom:16px;display:block}
+    .ft-logo{height:71px;width:auto;display:block}
     .ft-desc{font-size:0.87rem;color:rgba(255,255,255,0.4);line-height:1.7;max-width:270px}
     .ft-col-title{font-family:var(--fh);font-size:0.78rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
     .ft-links{list-style:none;display:flex;flex-direction:column;gap:10px}
