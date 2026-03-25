@@ -11,7 +11,7 @@
 
     /* ── LOGO ── */
     .logo-container {width: 250px;}
-    .logo {width: 100%;height: auto;}
+    .logo {height:44px;width:auto;display:block}
 
     /* ── NAV ── */
     nav{
