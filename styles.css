@@ -152,7 +152,7 @@
       position:relative;height:460px;overflow:hidden;
       display:flex;align-items:flex-end;
     }
-    .trailers-photo{position:absolute;inset:0;background:url('truck-inline-angle.jpg') no-repeat;background-size: cover;background-position: center 70%;}
+    .trailers-photo{position:absolute;inset:0;background:url('truck-inline-angle.jpg') no-repeat;background-size: cover;background-position: center 60%;}
     .trailers-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(14,26,63,0.88) 0%,rgba(14,26,63,0.4) 60%,transparent 100%)}
     .trailers-content{position:relative;z-index:2;padding:60px 80px 70px}
     .trailers-tag{font-family:var(--fh);font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:10px}
