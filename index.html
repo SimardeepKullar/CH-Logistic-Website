@@ -1,617 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CH Logistics — Canada & USA Transportation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy:   #1a2b6d;
-      --navy2:  #152258;
-      --blue:   #1a6fc4;
-      --cyan:   #00a8d8;
-      --cyan2:  #0090bb;
-      --white:  #ffffff;
-      --off:    #f4f6fb;
-      --border: #d0daea;
-      --muted:  #6b7a99;
-      --dark:   #0e1a3f;
-      --text:   #1a2340;
-      --fh: 'Barlow Condensed', sans-serif;
-      --fb: 'Barlow', sans-serif;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--text); font-family: var(--fb); overflow-x: hidden; }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 52px; height: 72px;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 20px rgba(26,43,109,0.07);
-    }
-    .nav-logo img { height: 44px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
-    .nav-links a {
-      font-family: var(--fh); font-weight: 600; font-size: 0.95rem;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--navy); }
-    .nav-cta {
-      background: var(--cyan) !important; color: #fff !important;
-      padding: 10px 24px !important; font-weight: 700 !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--cyan2) !important; }
-    .nav-ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .nav-ham span { display: block; width: 24px; height: 2px; background: var(--navy); }
-
-    /* HERO */
-    #hero {
-      min-height: 100vh; padding-top: 72px;
-      display: grid; grid-template-columns: 1fr 1fr;
-      position: relative; overflow: hidden;
-      background: var(--navy);
-    }
-    #hero::after {
-      content: ''; position: absolute; top: 0; right: 0;
-      width: 55%; height: 100%;
-      background: linear-gradient(135deg, #1a2b6d 0%, #1a6fc4 50%, #00a8d8 100%);
-      clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
-      z-index: 0;
-    }
-    .hero-lines {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background-image:
-        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.03) 80px),
-        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.03) 80px);
-    }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 80px 60px 80px 80px; position: relative; z-index: 2;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--fh); font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 28px;
-    }
-    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--cyan); }
-    .hero-title {
-      font-family: var(--fh); font-size: clamp(3.8rem,6.5vw,6.5rem); font-weight: 900;
-      line-height: 0.92; text-transform: uppercase; color: #fff; margin-bottom: 32px;
-    }
-    .hero-title .ac { color: var(--cyan); }
-    .hero-desc {
-      font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 420px; margin-bottom: 44px;
-    }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-p {
-      background: var(--cyan); color: #fff; font-family: var(--fh);
-      font-weight: 800; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 16px 36px; text-decoration: none; display: inline-block;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-p:hover { background: var(--cyan2); transform: translateY(-2px); }
-    .btn-o {
-      border: 2px solid rgba(255,255,255,0.3); color: #fff; font-family: var(--fh);
-      font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 14px 34px; text-decoration: none; display: inline-block;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-o:hover { border-color: var(--cyan); color: var(--cyan); }
-    .hero-stats {
-      display: flex; margin-top: 56px;
-      border-top: 1px solid rgba(255,255,255,0.15); padding-top: 32px;
-    }
-    .stat { flex: 1; padding-right: 28px; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 28px; }
-    .stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-    .stat-n { font-family: var(--fh); font-size: 2.8rem; font-weight: 900; color: var(--cyan); line-height: 1; }
-    .stat-l { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
-    .hero-right {
-      position: relative; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
-      padding: 60px 60px 60px 20px;
-    }
-    .hero-right svg { width: 100%; max-width: 540px; }
-
-    /* TICKER */
-    .ticker { background: var(--navy); overflow: hidden; padding: 11px 0; white-space: nowrap; border-top: 3px solid var(--cyan); }
-    .ticker-inner { display: inline-flex; animation: ticker 28s linear infinite; }
-    .ticker-item { font-family: var(--fh); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7); padding: 0 36px; }
-    .ticker-dot { color: var(--cyan); }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    /* SECTIONS */
-    section { padding: 100px 80px; }
-    .s-label {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--fh); font-size: 0.78rem; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 18px;
-    }
-    .s-label::before { content: ''; display: block; width: 24px; height: 2px; background: var(--cyan); }
-    .s-title {
-      font-family: var(--fh); font-size: clamp(2.6rem,4.5vw,4rem); font-weight: 900;
-      text-transform: uppercase; line-height: 0.95; color: var(--navy); margin-bottom: 20px;
-    }
-
-    /* SERVICES */
-    #services { background: var(--off); border-top: 1px solid var(--border); }
-    .svc-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 64px; }
-    .svc-intro { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 400px; }
-    .svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .svc-card {
-      background: #fff; padding: 40px 32px; border: 1px solid var(--border);
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-    .svc-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--navy), var(--cyan));
-      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
-    }
-    .svc-card:hover { border-color: rgba(0,168,216,0.3); box-shadow: 0 8px 32px rgba(26,43,109,0.1); transform: translateY(-3px); }
-    .svc-card:hover::before { transform: scaleX(1); }
-    .svc-icon { width: 48px; height: 48px; margin-bottom: 24px; }
-    .svc-name { font-family: var(--fh); font-size: 1.35rem; font-weight: 800; text-transform: uppercase; color: var(--navy); margin-bottom: 12px; }
-    .svc-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
-
-    /* ABOUT */
-    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; padding: 110px 80px; }
-    .about-vis { position: relative; }
-    .about-img { background: var(--navy); aspect-ratio: 4/3; position: relative; overflow: hidden; }
-    .about-img svg { width: 100%; height: 100%; }
-    .about-badge {
-      position: absolute; top: -16px; right: 32px;
-      background: var(--cyan); color: #fff;
-      font-family: var(--fh); font-size: 0.75rem; font-weight: 900;
-      letter-spacing: 0.15em; text-transform: uppercase; padding: 10px 18px;
-    }
-    .about-block { position: absolute; bottom: -20px; left: -20px; width: 90px; height: 90px; background: var(--navy2); z-index: -1; }
-    .about-body { font-size: 0.98rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
-    .about-list { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .ali { display: flex; align-items: flex-start; gap: 12px; }
-    .ali-icon {
-      width: 22px; height: 22px; flex-shrink: 0;
-      background: rgba(0,168,216,0.1); border: 1.5px solid rgba(0,168,216,0.35);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px;
-    }
-    .ali-text { font-size: 0.87rem; color: var(--muted); line-height: 1.5; }
-    .ali-text strong { display: block; font-family: var(--fh); font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 1px; }
-
-    /* COVERAGE */
-    #coverage { background: var(--dark); text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
-    #coverage .s-label { justify-content: center; }
-    #coverage .s-title { color: #fff; }
-    #coverage .sub { color: rgba(255,255,255,0.5); max-width: 500px; margin: 0 auto 56px; font-size: 1rem; line-height: 1.7; }
-    .map-wrap { max-width: 820px; margin: 0 auto; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 40px; }
-    .map-wrap svg { width: 100%; height: auto; display: block; }
-    .cpills { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
-    .cpill {
-      display: flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      padding: 11px 22px; font-family: var(--fh); font-size: 0.88rem;
-      font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.8);
-    }
-    .pd { width: 9px; height: 9px; border-radius: 50%; }
-    .pd.ca { background: var(--cyan); }
-    .pd.us { background: #60a5fa; }
-
-    /* WHY */
-    #why { background: var(--off); border-top: 1px solid var(--border); }
-    .why-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 36px; margin-top: 60px; }
-    .why-item { border-top: 3px solid var(--border); padding-top: 26px; transition: border-color 0.3s; }
-    .why-item:hover { border-color: var(--cyan); }
-    .why-num { font-family: var(--fh); font-size: 2.8rem; font-weight: 900; color: rgba(0,168,216,0.18); line-height: 1; margin-bottom: 14px; }
-    .why-title { font-family: var(--fh); font-size: 1.15rem; font-weight: 800; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; }
-    .why-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
-
-    /* CONTACT */
-    #contact { background: #fff; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding: 100px 80px; }
-    .cdesc { font-size: 0.98rem; color: var(--muted); line-height: 1.75; margin-bottom: 44px; }
-    .cdetails { display: flex; flex-direction: column; gap: 22px; }
-    .citem { display: flex; gap: 14px; align-items: flex-start; }
-    .ci-icon { width: 40px; height: 40px; flex-shrink: 0; background: rgba(0,168,216,0.1); border: 1px solid rgba(0,168,216,0.25); display: flex; align-items: center; justify-content: center; }
-    .ci-text { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-    .ci-text strong { display: block; font-family: var(--fh); font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 1px; }
-    .cform { display: flex; flex-direction: column; gap: 18px; }
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .fg { display: flex; flex-direction: column; gap: 6px; }
-    .fl { font-family: var(--fh); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-    .fi, .fs, .ft {
-      background: var(--off); border: 1.5px solid var(--border);
-      color: var(--text); font-family: var(--fb); font-size: 0.92rem;
-      padding: 13px 16px; outline: none; transition: border-color 0.2s; width: 100%;
-    }
-    .fi:focus, .fs:focus, .ft:focus { border-color: var(--cyan); }
-    .ft { resize: vertical; min-height: 110px; }
-    .fs option { background: #fff; }
-    .fsub {
-      background: var(--navy); color: #fff; font-family: var(--fh); font-weight: 800;
-      font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 17px 40px; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.2s; align-self: flex-start;
-    }
-    .fsub:hover { background: var(--blue); transform: translateY(-2px); }
-
-    /* FOOTER */
-    footer { background: var(--dark); border-top: 3px solid var(--cyan); padding: 64px 80px 36px; }
-    .ft-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 30px; }
-    .ft-logo { height: 40px; width: auto; margin-bottom: 16px; display: block; }
-    .ft-desc { font-size: 0.87rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 270px; }
-    .ft-col-title { font-family: var(--fh); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 18px; }
-    .ft-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .ft-links a { font-size: 0.87rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
-    .ft-links a:hover { color: #fff; }
-    .ft-bot { display: flex; justify-content: space-between; align-items: center; }
-    .ft-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
-    .ft-tag { font-family: var(--fh); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
-
-    /* ANIMATION */
-    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* RESPONSIVE */
-    @media (max-width:1100px) {
-      #hero { grid-template-columns: 1fr; }
-      #hero::after { display: none; }
-      #hero { background: linear-gradient(135deg,#152258 0%,#1a2b6d 50%,#1a6fc4 100%); }
-      .hero-right { display: none; }
-      .hero-left { padding: 80px 40px; }
-      .svc-grid { grid-template-columns: 1fr 1fr; }
-      .svc-header { grid-template-columns: 1fr; }
-      #about { grid-template-columns: 1fr; gap: 56px; padding: 80px 40px; }
-      .why-grid { grid-template-columns: 1fr 1fr; }
-      #contact { grid-template-columns: 1fr; padding: 80px 40px; }
-      .ft-top { grid-template-columns: 1fr 1fr; gap: 36px; }
-      section { padding: 80px 40px; }
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .nav-ham { display: flex; }
-    }
-    @media (max-width:640px) {
-      .svc-grid,.why-grid { grid-template-columns: 1fr; }
-      .ft-top { grid-template-columns: 1fr; }
-      .frow { grid-template-columns: 1fr; }
-      .hero-stats { flex-direction: column; gap: 18px; }
-      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 18px; margin-bottom: 0; }
-      section { padding: 60px 20px; }
-      #about,#contact { padding: 60px 20px; }
-      footer { padding: 40px 20px 24px; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo"><img src="data:image/png;base64,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" alt="CH Logistics"/></a>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#coverage">Coverage</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
-  </ul>
-  <div class="nav-ham"><span></span><span></span><span></span></div>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo"><img
+        src="data:image/png;base64,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"
+        alt="CH Logistics" /></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#coverage">Coverage</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+    <div class="nav-ham"><span></span><span></span><span></span></div>
+  </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-lines"></div>
-  <div class="hero-left fade-up">
-    <div class="hero-eyebrow">Burlington, Ontario &mdash; Est. 2010</div>
-    <h1 class="hero-title">Moving<br><span class="ac">Canada</span><br>&amp; the USA</h1>
-    <p class="hero-desc">CH Logistics delivers reliable, on-time freight transportation across Canada and the United States. Full truckload, LTL, and dedicated fleet services built for businesses that can&rsquo;t afford delays.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-p">Request a Quote</a>
-      <a href="#services" class="btn-o">Our Services</a>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-lines"></div>
+    <div class="hero-left fade-up">
+      <div class="hero-eyebrow">Burlington, Ontario &mdash; Est. 2010</div>
+      <h1 class="hero-title">Moving<br><span class="ac">Canada</span><br>&amp; the USA</h1>
+      <p class="hero-desc">CH Logistics delivers reliable, on-time freight transportation across Canada and the United
+        States. Full truckload, LTL, and dedicated fleet services built for businesses that can&rsquo;t afford delays.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-p">Request a Quote</a>
+        <a href="#services" class="btn-o">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-n">15+</div>
+          <div class="stat-l">Years in Operation</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">50+</div>
+          <div class="stat-l">Active Fleet Units</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">2</div>
+          <div class="stat-l">Countries Covered</div>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Years in Operation</div></div>
-      <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Active Fleet Units</div></div>
-      <div class="stat"><div class="stat-n">2</div><div class="stat-l">Countries Covered</div></div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
-      <!-- Road -->
-      <rect y="270" width="520" height="110" fill="rgba(0,0,0,0.25)"/>
-      <rect y="266" width="520" height="6" fill="rgba(255,255,255,0.1)"/>
-      <rect x="20" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-      <rect x="160" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-      <rect x="300" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-      <rect x="440" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-      <ellipse cx="260" cy="268" rx="300" ry="14" fill="rgba(0,168,216,0.08)"/>
-      <!-- Trailer -->
-      <rect x="20" y="168" width="330" height="102" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-      <rect x="20" y="168" width="330" height="4" fill="rgba(0,168,216,0.7)"/>
-      <text x="185" y="224" font-family="Barlow Condensed, Arial Black, sans-serif" font-size="20" font-weight="900" fill="white" opacity="0.9" text-anchor="middle" letter-spacing="1">CH LOGISTICS</text>
-      <text x="185" y="241" font-family="Barlow Condensed, sans-serif" font-size="8.5" fill="rgba(0,168,216,0.85)" text-anchor="middle" letter-spacing="3.5">BURLINGTON · ONTARIO</text>
-      <!-- Cab -->
-      <rect x="342" y="182" width="122" height="90" rx="5" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-      <rect x="360" y="190" width="72" height="46" rx="3" fill="rgba(0,168,216,0.15)" stroke="rgba(0,168,216,0.3)" stroke-width="1.5"/>
-      <rect x="342" y="232" width="122" height="3" fill="rgba(0,168,216,0.4)"/>
-      <rect x="450" y="158" width="7" height="26" rx="2" fill="rgba(255,255,255,0.15)"/>
-      <!-- Wheels -->
-      <circle cx="90" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5"/>
-      <circle cx="90" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)" stroke-width="1.5"/>
-      <circle cx="90" cy="280" r="5" fill="rgba(0,168,216,0.4)"/>
-      <circle cx="210" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5"/>
-      <circle cx="210" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)" stroke-width="1.5"/>
-      <circle cx="210" cy="280" r="5" fill="rgba(0,168,216,0.4)"/>
-      <circle cx="376" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5"/>
-      <circle cx="376" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)" stroke-width="1.5"/>
-      <circle cx="376" cy="280" r="5" fill="rgba(0,168,216,0.4)"/>
-      <circle cx="452" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5"/>
-      <circle cx="452" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)" stroke-width="1.5"/>
-      <circle cx="452" cy="280" r="5" fill="rgba(0,168,216,0.4)"/>
-      <!-- Headlights -->
-      <ellipse cx="464" cy="218" rx="9" ry="7" fill="rgba(0,168,216,0.7)"/>
-      <path d="M473 215 L520 205" stroke="rgba(0,168,216,0.2)" stroke-width="1.2"/>
-      <path d="M473 221 L520 231" stroke="rgba(0,168,216,0.15)" stroke-width="1.2"/>
-    </svg>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">Full Truckload</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">LTL Shipping</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Cross-Border Transport</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Dedicated Fleet</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Temperature-Controlled</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Expedited Freight</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Full Truckload</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">LTL Shipping</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Cross-Border Transport</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Dedicated Fleet</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Temperature-Controlled</span><span class="ticker-item ticker-dot">&loz;</span>
-    <span class="ticker-item">Expedited Freight</span><span class="ticker-item ticker-dot">&loz;</span>
-  </div>
-</div>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="svc-header fade-up">
-    <div><div class="s-label">What We Do</div><h2 class="s-title">Our Services</h2></div>
-    <p class="svc-intro">Whether you need a single truckload or an ongoing dedicated solution, CH Logistics has the capacity, cross-border expertise, and commitment to keep your supply chain moving.</p>
-  </div>
-  <div class="svc-grid">
-    <div class="svc-card fade-up">
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none"><rect x="2" y="14" width="30" height="20" rx="2" stroke="#1a2b6d" stroke-width="2"/><rect x="32" y="20" width="14" height="14" rx="2" stroke="#00a8d8" stroke-width="2"/><path d="M32 26h7l3 4" stroke="#00a8d8" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="36" r="5" stroke="#1a2b6d" stroke-width="2"/><circle cx="37" cy="36" r="5" stroke="#00a8d8" stroke-width="2"/></svg>
-      <div class="svc-name">Full Truckload (FTL)</div>
-      <p class="svc-desc">Dedicated trailers for large shipments moving across Canada or into the U.S. Maximum efficiency for high-volume freight with direct point-to-point delivery.</p>
-    </div>
-    <div class="svc-card fade-up" style="transition-delay:0.08s">
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none"><rect x="4" y="10" width="40" height="26" rx="2" stroke="#1a2b6d" stroke-width="2"/><path d="M4 20h40M20 10v26" stroke="#1a2b6d" stroke-width="1.8"/><rect x="7" y="13" width="9" height="5" rx="1" fill="#00a8d8" opacity="0.3"/><rect x="24" y="13" width="16" height="5" rx="1" fill="#00a8d8" opacity="0.3"/><rect x="24" y="22" width="9" height="5" rx="1" fill="#00a8d8" opacity="0.3"/></svg>
-      <div class="svc-name">Less-Than-Truckload (LTL)</div>
-      <p class="svc-desc">Cost-effective shipping for smaller loads. Share trailer space while benefiting from our extensive network and reliable scheduling across North America.</p>
-    </div>
-    <div class="svc-card fade-up" style="transition-delay:0.16s">
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#1a2b6d" stroke-width="2"/><path d="M24 6v36M6 24h36" stroke="#1a2b6d" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="18" y="18" width="12" height="12" rx="1" fill="#00a8d8" opacity="0.2" stroke="#00a8d8" stroke-width="1.5"/><path d="M12 12c4 5 8 9 12 12s8 7 12 12" stroke="#00a8d8" stroke-width="2" stroke-linecap="round"/></svg>
-      <div class="svc-name">Cross-Border Transport</div>
-      <p class="svc-desc">Seamless Canada&ndash;USA freight movement with full customs compliance, border expertise, and documentation to keep your shipments flowing without delays.</p>
-    </div>
-    <div class="svc-card fade-up" style="transition-delay:0.24s">
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="28" height="16" rx="2" stroke="#1a2b6d" stroke-width="2"/><rect x="32" y="22" width="12" height="12" rx="2" stroke="#00a8d8" stroke-width="2"/><circle cx="12" cy="36" r="4" stroke="#1a2b6d" stroke-width="2"/><circle cx="36" cy="36" r="4" stroke="#00a8d8" stroke-width="2"/><path d="M10 10l3 8M18 10l3 8" stroke="#1a2b6d" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <div class="svc-name">Dedicated Fleet</div>
-      <p class="svc-desc">Consistent, contracted capacity with drivers who know your lanes. Ideal for businesses with regular, predictable shipping needs requiring above-all reliability.</p>
-    </div>
-    <div class="svc-card fade-up" style="transition-delay:0.32s">
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#1a2b6d" stroke-width="2"/><path d="M24 12v12l8 4" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 38l4-4M38 38l-4-4" stroke="#1a2b6d" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <div class="svc-name">Expedited Freight</div>
-      <p class="svc-desc">Time-critical shipments demand a higher response level. Our expedited service guarantees priority handling and accelerated delivery across the continent.</p>
-    </div>
-    <div class="svc-card fade-up" style="transition-delay:0.4s">
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="26" rx="2" stroke="#1a2b6d" stroke-width="2"/><path d="M6 20h36" stroke="#1a2b6d" stroke-width="1.5"/><path d="M24 10v8" stroke="#1a2b6d" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="32" r="5" stroke="#00a8d8" stroke-width="1.5"/><path d="M24 29v2M24 34v2M21 32h2M26 32h2" stroke="#00a8d8" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <div class="svc-name">Temperature-Controlled</div>
-      <p class="svc-desc">Refrigerated and climate-controlled transport for perishables, pharmaceuticals, and sensitive goods with full cold-chain integrity from pickup to delivery.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-vis fade-up">
-    <div class="about-badge">Burlington, ON</div>
-    <div class="about-img">
-      <svg viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="abg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e1a3f"/><stop offset="100%" stop-color="#1a2b6d"/></linearGradient></defs>
-        <rect width="520" height="390" fill="url(#abg)"/>
-        <rect y="280" width="520" height="110" fill="#0a1228"/>
-        <rect y="276" width="520" height="6" fill="#1a2b6d"/>
-        <rect x="30" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3"/>
-        <rect x="170" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3"/>
-        <rect x="310" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3"/>
-        <rect x="450" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3"/>
-        <ellipse cx="260" cy="280" rx="320" ry="14" fill="#00a8d8" opacity="0.07"/>
-        <rect x="20" y="172" width="320" height="108" rx="3" fill="#152258" stroke="#1a6fc4" stroke-width="1.5"/>
-        <rect x="20" y="172" width="320" height="4" fill="#00a8d8" opacity="0.8"/>
-        <text x="180" y="230" font-family="Barlow Condensed, Arial Black, sans-serif" font-size="22" font-weight="900" fill="white" opacity="0.95" text-anchor="middle" letter-spacing="1">CH LOGISTICS</text>
-        <text x="180" y="248" font-family="Barlow Condensed, sans-serif" font-size="9" fill="#00a8d8" opacity="0.85" text-anchor="middle" letter-spacing="3.5">BURLINGTON · ONTARIO</text>
-        <rect x="332" y="186" width="116" height="94" rx="5" fill="#1a2b6d" stroke="#1a6fc4" stroke-width="1.5"/>
-        <rect x="350" y="194" width="66" height="44" rx="3" fill="#00a8d8" opacity="0.12" stroke="#00a8d8" stroke-width="1.2" stroke-opacity="0.35"/>
-        <rect x="332" y="234" width="116" height="3" fill="#00a8d8" opacity="0.4"/>
-        <rect x="438" y="162" width="7" height="26" rx="2" fill="#1a6fc4"/>
-        <circle cx="88" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5"/>
-        <circle cx="88" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5"/>
-        <circle cx="88" cy="290" r="5" fill="#00a8d8" opacity="0.5"/>
-        <circle cx="200" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5"/>
-        <circle cx="200" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5"/>
-        <circle cx="200" cy="290" r="5" fill="#00a8d8" opacity="0.5"/>
-        <circle cx="362" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5"/>
-        <circle cx="362" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5"/>
-        <circle cx="362" cy="290" r="5" fill="#00a8d8" opacity="0.5"/>
-        <circle cx="432" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5"/>
-        <circle cx="432" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5"/>
-        <circle cx="432" cy="290" r="5" fill="#00a8d8" opacity="0.5"/>
-        <ellipse cx="448" cy="222" rx="8" ry="6" fill="#00a8d8" opacity="0.7"/>
-        <path d="M456 219 L520 208" stroke="#00a8d8" stroke-width="1" opacity="0.18"/>
-        <path d="M456 225 L520 236" stroke="#00a8d8" stroke-width="1" opacity="0.12"/>
+    <div class="hero-right">
+      <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- Road -->
+        <rect y="270" width="520" height="110" fill="rgba(0,0,0,0.25)" />
+        <rect y="266" width="520" height="6" fill="rgba(255,255,255,0.1)" />
+        <rect x="20" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)" />
+        <rect x="160" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)" />
+        <rect x="300" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)" />
+        <rect x="440" y="318" width="70" height="4" rx="2" fill="rgba(255,255,255,0.2)" />
+        <ellipse cx="260" cy="268" rx="300" ry="14" fill="rgba(0,168,216,0.08)" />
+        <!-- Trailer -->
+        <rect x="20" y="168" width="330" height="102" rx="3" fill="rgba(255,255,255,0.08)"
+          stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+        <rect x="20" y="168" width="330" height="4" fill="rgba(0,168,216,0.7)" />
+        <text x="185" y="224" font-family="Barlow Condensed, Arial Black, sans-serif" font-size="20" font-weight="900"
+          fill="white" opacity="0.9" text-anchor="middle" letter-spacing="1">CH LOGISTICS</text>
+        <text x="185" y="241" font-family="Barlow Condensed, sans-serif" font-size="8.5" fill="rgba(0,168,216,0.85)"
+          text-anchor="middle" letter-spacing="3.5">BURLINGTON · ONTARIO</text>
+        <!-- Cab -->
+        <rect x="342" y="182" width="122" height="90" rx="5" fill="rgba(255,255,255,0.1)"
+          stroke="rgba(255,255,255,0.18)" stroke-width="1.5" />
+        <rect x="360" y="190" width="72" height="46" rx="3" fill="rgba(0,168,216,0.15)" stroke="rgba(0,168,216,0.3)"
+          stroke-width="1.5" />
+        <rect x="342" y="232" width="122" height="3" fill="rgba(0,168,216,0.4)" />
+        <rect x="450" y="158" width="7" height="26" rx="2" fill="rgba(255,255,255,0.15)" />
+        <!-- Wheels -->
+        <circle cx="90" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5" />
+        <circle cx="90" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)" stroke-width="1.5" />
+        <circle cx="90" cy="280" r="5" fill="rgba(0,168,216,0.4)" />
+        <circle cx="210" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5" />
+        <circle cx="210" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)"
+          stroke-width="1.5" />
+        <circle cx="210" cy="280" r="5" fill="rgba(0,168,216,0.4)" />
+        <circle cx="376" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5" />
+        <circle cx="376" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)"
+          stroke-width="1.5" />
+        <circle cx="376" cy="280" r="5" fill="rgba(0,168,216,0.4)" />
+        <circle cx="452" cy="280" r="28" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="2.5" />
+        <circle cx="452" cy="280" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(0,168,216,0.4)"
+          stroke-width="1.5" />
+        <circle cx="452" cy="280" r="5" fill="rgba(0,168,216,0.4)" />
+        <!-- Headlights -->
+        <ellipse cx="464" cy="218" rx="9" ry="7" fill="rgba(0,168,216,0.7)" />
+        <path d="M473 215 L520 205" stroke="rgba(0,168,216,0.2)" stroke-width="1.2" />
+        <path d="M473 221 L520 231" stroke="rgba(0,168,216,0.15)" stroke-width="1.2" />
       </svg>
     </div>
-    <div class="about-block"></div>
-  </div>
-  <div class="fade-up" style="transition-delay:0.15s">
-    <div class="s-label">About CH Logistics</div>
-    <h2 class="s-title">Built on<br>Reliability</h2>
-    <p class="about-body">CH Logistics is a Burlington, Ontario-based carrier with over 15 years of experience moving freight across Canada and the United States. We started with a simple commitment: show up on time, every time.</p>
-    <p class="about-body">Strategically located near the QEW and major border crossings, we serve clients in manufacturing, retail, food &amp; beverage, and industrial sectors. Our team works around the clock to keep your supply chain moving.</p>
-    <div class="about-list">
-      <div class="ali"><div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ali-text"><strong>FMCSA &amp; Transport Canada Licensed</strong>Fully compliant for cross-border ops</div></div>
-      <div class="ali"><div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ali-text"><strong>Real-Time GPS Tracking</strong>Know where your load is, always</div></div>
-      <div class="ali"><div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ali-text"><strong>24/7 Dispatch Support</strong>Day or night, someone&rsquo;s always on</div></div>
-      <div class="ali"><div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ali-text"><strong>Customs Brokerage Network</strong>Smooth border clearance, every time</div></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- COVERAGE -->
-<section id="coverage">
-  <div class="s-label">Where We Operate</div>
-  <h2 class="s-title fade-up">Canada &amp; U.S.<br>Coverage</h2>
-  <p class="sub fade-up">From coast to coast in Canada and all major U.S. markets &mdash; our network spans the full breadth of North American freight lanes.</p>
-  <div class="map-wrap fade-up">
-    <svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg">
-      <defs><filter id="cg"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-      <path d="M60,58 L80,48 L140,43 L200,38 L280,36 L360,34 L440,36 L510,42 L560,50 L600,60 L630,78 L640,98 L635,123 L620,143 L600,156 L575,160 L555,153 L535,146 L510,153 L495,168 L485,186 L470,198 L445,203 L420,196 L400,190 L378,193 L365,208 L360,226 L352,238 L335,243 L315,238 L300,228 L280,230 L265,243 L255,260 L248,276 L238,266 L225,256 L208,253 L192,258 L178,268 L165,276 L148,273 L132,263 L118,253 L105,246 L92,240 L78,236 L65,226 L55,213 L48,196 L44,178 L42,158 L44,136 L48,116 L54,96 L60,78 Z" fill="rgba(0,168,216,0.08)" stroke="rgba(0,168,216,0.3)" stroke-width="1.5"/>
-      <path d="M44,136 L40,118 L30,103 L20,93 L15,78 L18,63 L28,56 L38,54 L48,58 L55,70 L58,86 L55,103 L50,118 L46,133 Z" fill="rgba(0,168,216,0.05)" stroke="rgba(0,168,216,0.2)" stroke-width="1"/>
-      <path d="M105,246 L118,253 L132,263 L148,273 L165,276 L178,268 L192,258 L208,253 L225,256 L238,266 L248,276 L255,260 L265,243 L280,230 L300,228 L315,238 L335,243 L352,238 L360,226 L365,208 L378,193 L400,190 L420,196 L445,203 L470,198 L485,186 L495,168 L510,153 L535,146 L555,153 L575,160 L600,156 L615,163 L625,180 L630,198 L628,216 L620,233 L610,250 L605,268 L608,286 L615,303 L618,323 L612,340 L600,353 L580,360 L558,363 L535,360 L510,356 L485,358 L460,363 L435,366 L410,364 L385,360 L360,363 L335,368 L310,373 L285,376 L260,373 L238,366 L218,358 L200,350 L182,340 L165,328 L150,316 L136,304 L122,293 L110,280 L100,266 L97,253 Z" fill="rgba(96,165,250,0.07)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-      <path d="M460,363 L468,378 L472,393 L468,406 L458,413 L448,408 L443,393 L445,376 L452,365 Z" fill="rgba(96,165,250,0.06)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
-      <path d="M105,246 L192,258 L255,260 L280,230 L335,243 L360,226 L378,193 L445,203 L495,168 L555,153 L600,156" stroke="rgba(0,168,216,0.5)" stroke-width="1.5" stroke-dasharray="6 4" fill="none"/>
-      <circle cx="430" cy="216" r="8" fill="#00a8d8" filter="url(#cg)"/><circle cx="430" cy="216" r="4" fill="white"/>
-      <text x="444" y="211" font-family="Barlow Condensed, sans-serif" font-size="11" font-weight="700" fill="#00a8d8" letter-spacing="1">BURLINGTON, ON</text>
-      <text x="444" y="223" font-family="Barlow Condensed, sans-serif" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="0.5">HEADQUARTERS</text>
-      <line x1="430" y1="216" x2="198" y2="103" stroke="rgba(0,168,216,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <line x1="430" y1="216" x2="578" y2="118" stroke="rgba(0,168,216,0.2)" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <line x1="430" y1="216" x2="93" y2="188" stroke="rgba(0,168,216,0.18)" stroke-width="1.2" stroke-dasharray="4 3"/>
-      <line x1="430" y1="216" x2="338" y2="313" stroke="rgba(96,165,250,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <line x1="430" y1="216" x2="498" y2="318" stroke="rgba(96,165,250,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <line x1="430" y1="216" x2="218" y2="318" stroke="rgba(96,165,250,0.22)" stroke-width="1.2" stroke-dasharray="4 3"/>
-      <circle cx="198" cy="103" r="4" fill="rgba(0,168,216,0.7)"/><text x="210" y="107" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Vancouver</text>
-      <circle cx="308" cy="93" r="4" fill="rgba(0,168,216,0.7)"/><text x="313" y="88" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Calgary</text>
-      <circle cx="378" cy="88" r="4" fill="rgba(0,168,216,0.7)"/><text x="383" y="84" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Winnipeg</text>
-      <circle cx="418" cy="103" r="4" fill="rgba(0,168,216,0.7)"/><text x="408" y="98" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Toronto</text>
-      <circle cx="488" cy="106" r="4" fill="rgba(0,168,216,0.7)"/><text x="493" y="102" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Montréal</text>
-      <circle cx="578" cy="118" r="4" fill="rgba(0,168,216,0.7)"/><text x="583" y="114" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Halifax</text>
-      <circle cx="338" cy="313" r="4" fill="rgba(96,165,250,0.7)"/><text x="346" y="318" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Chicago</text>
-      <circle cx="218" cy="318" r="4" fill="rgba(96,165,250,0.7)"/><text x="163" y="314" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Minneapolis</text>
-      <circle cx="463" cy="286" r="4" fill="rgba(96,165,250,0.7)"/><text x="468" y="282" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">New York</text>
-      <circle cx="498" cy="318" r="4" fill="rgba(96,165,250,0.7)"/><text x="503" y="314" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Philadelphia</text>
-      <circle cx="278" cy="346" r="4" fill="rgba(96,165,250,0.7)"/><text x="223" y="343" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Kansas City</text>
-      <circle cx="378" cy="356" r="4" fill="rgba(96,165,250,0.7)"/><text x="368" y="368" font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Nashville</text>
-      <text x="295" y="158" font-family="Barlow Condensed, sans-serif" font-size="17" font-weight="700" fill="rgba(0,168,216,0.12)" letter-spacing="6" text-anchor="middle">CANADA</text>
-      <text x="358" y="293" font-family="Barlow Condensed, sans-serif" font-size="17" font-weight="700" fill="rgba(96,165,250,0.1)" letter-spacing="6" text-anchor="middle">UNITED STATES</text>
-    </svg>
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">Full Truckload</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">LTL Shipping</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Cross-Border Transport</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Dedicated Fleet</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Temperature-Controlled</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Expedited Freight</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Full Truckload</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">LTL Shipping</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Cross-Border Transport</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Dedicated Fleet</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Temperature-Controlled</span><span class="ticker-item ticker-dot">&loz;</span>
+      <span class="ticker-item">Expedited Freight</span><span class="ticker-item ticker-dot">&loz;</span>
+    </div>
   </div>
-  <div class="cpills fade-up">
-    <div class="cpill"><span class="pd ca"></span>All Canadian Provinces &amp; Territories</div>
-    <div class="cpill"><span class="pd us"></span>All 48 Contiguous U.S. States</div>
-    <div class="cpill"><span class="pd ca"></span>Cross-Border Canada &harr; USA</div>
-  </div>
-</section>
 
-<!-- WHY -->
-<section id="why">
-  <div class="s-label">Why CH Logistics</div>
-  <h2 class="s-title fade-up">The Difference<br>Is in the Details</h2>
-  <div class="why-grid">
-    <div class="why-item fade-up"><div class="why-num">01</div><div class="why-title">On-Time Performance</div><p class="why-desc">Our operations are built around schedule adherence. When we commit to a delivery window, we honour it &mdash; with contingency planning baked into every run.</p></div>
-    <div class="why-item fade-up" style="transition-delay:0.1s"><div class="why-num">02</div><div class="why-title">Cross-Border Expertise</div><p class="why-desc">Years at Canadian-American border crossings means zero surprises. We handle documentation, compliance, and customs coordination so you don&rsquo;t have to.</p></div>
-    <div class="why-item fade-up" style="transition-delay:0.2s"><div class="why-num">03</div><div class="why-title">Modern Fleet</div><p class="why-desc">A well-maintained, late-model fleet with GPS tracking, ELD systems, and safety monitoring. Fewer breakdowns, better visibility, greater peace of mind.</p></div>
-    <div class="why-item fade-up" style="transition-delay:0.3s"><div class="why-num">04</div><div class="why-title">Local Roots, National Reach</div><p class="why-desc">Burlington-based and personally invested in every client relationship. Large enough for volume, small enough to pick up the phone when it matters.</p></div>
-  </div>
-</section>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="svc-header fade-up">
+      <div>
+        <div class="s-label">What We Do</div>
+        <h2 class="s-title">Our Services</h2>
+      </div>
+      <p class="svc-intro">Whether you need a single truckload or an ongoing dedicated solution, CH Logistics has the
+        capacity, cross-border expertise, and commitment to keep your supply chain moving.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card fade-up">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="2" y="14" width="30" height="20" rx="2" stroke="#1a2b6d" stroke-width="2" />
+          <rect x="32" y="20" width="14" height="14" rx="2" stroke="#00a8d8" stroke-width="2" />
+          <path d="M32 26h7l3 4" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" />
+          <circle cx="11" cy="36" r="5" stroke="#1a2b6d" stroke-width="2" />
+          <circle cx="37" cy="36" r="5" stroke="#00a8d8" stroke-width="2" />
+        </svg>
+        <div class="svc-name">Full Truckload (FTL)</div>
+        <p class="svc-desc">Dedicated trailers for large shipments moving across Canada or into the U.S. Maximum
+          efficiency for high-volume freight with direct point-to-point delivery.</p>
+      </div>
+      <div class="svc-card fade-up" style="transition-delay:0.08s">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="4" y="10" width="40" height="26" rx="2" stroke="#1a2b6d" stroke-width="2" />
+          <path d="M4 20h40M20 10v26" stroke="#1a2b6d" stroke-width="1.8" />
+          <rect x="7" y="13" width="9" height="5" rx="1" fill="#00a8d8" opacity="0.3" />
+          <rect x="24" y="13" width="16" height="5" rx="1" fill="#00a8d8" opacity="0.3" />
+          <rect x="24" y="22" width="9" height="5" rx="1" fill="#00a8d8" opacity="0.3" />
+        </svg>
+        <div class="svc-name">Less-Than-Truckload (LTL)</div>
+        <p class="svc-desc">Cost-effective shipping for smaller loads. Share trailer space while benefiting from our
+          extensive network and reliable scheduling across North America.</p>
+      </div>
+      <div class="svc-card fade-up" style="transition-delay:0.16s">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="18" stroke="#1a2b6d" stroke-width="2" />
+          <path d="M24 6v36M6 24h36" stroke="#1a2b6d" stroke-width="1.5" stroke-dasharray="3 2" />
+          <rect x="18" y="18" width="12" height="12" rx="1" fill="#00a8d8" opacity="0.2" stroke="#00a8d8"
+            stroke-width="1.5" />
+          <path d="M12 12c4 5 8 9 12 12s8 7 12 12" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <div class="svc-name">Cross-Border Transport</div>
+        <p class="svc-desc">Seamless Canada&ndash;USA freight movement with full customs compliance, border expertise,
+          and documentation to keep your shipments flowing without delays.</p>
+      </div>
+      <div class="svc-card fade-up" style="transition-delay:0.24s">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="4" y="18" width="28" height="16" rx="2" stroke="#1a2b6d" stroke-width="2" />
+          <rect x="32" y="22" width="12" height="12" rx="2" stroke="#00a8d8" stroke-width="2" />
+          <circle cx="12" cy="36" r="4" stroke="#1a2b6d" stroke-width="2" />
+          <circle cx="36" cy="36" r="4" stroke="#00a8d8" stroke-width="2" />
+          <path d="M10 10l3 8M18 10l3 8" stroke="#1a2b6d" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <div class="svc-name">Dedicated Fleet</div>
+        <p class="svc-desc">Consistent, contracted capacity with drivers who know your lanes. Ideal for businesses with
+          regular, predictable shipping needs requiring above-all reliability.</p>
+      </div>
+      <div class="svc-card fade-up" style="transition-delay:0.32s">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="18" stroke="#1a2b6d" stroke-width="2" />
+          <path d="M24 12v12l8 4" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10 38l4-4M38 38l-4-4" stroke="#1a2b6d" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <div class="svc-name">Expedited Freight</div>
+        <p class="svc-desc">Time-critical shipments demand a higher response level. Our expedited service guarantees
+          priority handling and accelerated delivery across the continent.</p>
+      </div>
+      <div class="svc-card fade-up" style="transition-delay:0.4s">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="10" width="36" height="26" rx="2" stroke="#1a2b6d" stroke-width="2" />
+          <path d="M6 20h36" stroke="#1a2b6d" stroke-width="1.5" />
+          <path d="M24 10v8" stroke="#1a2b6d" stroke-width="1.5" stroke-linecap="round" />
+          <circle cx="24" cy="32" r="5" stroke="#00a8d8" stroke-width="1.5" />
+          <path d="M24 29v2M24 34v2M21 32h2M26 32h2" stroke="#00a8d8" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <div class="svc-name">Temperature-Controlled</div>
+        <p class="svc-desc">Refrigerated and climate-controlled transport for perishables, pharmaceuticals, and
+          sensitive goods with full cold-chain integrity from pickup to delivery.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="fade-up">
-    <div class="s-label">Get in Touch</div>
-    <h2 class="s-title">Request<br>a Quote</h2>
-    <p class="cdesc">Tell us about your shipment and we&rsquo;ll get back to you with a competitive rate within 24 hours.</p>
-    <div class="cdetails">
-      <div class="citem"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1C5.686 1 3 3.686 3 7c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="#00a8d8" stroke-width="1.4"/></svg></div><div class="ci-text"><strong>Head Office</strong>Burlington, Ontario, Canada</div></div>
-      <div class="citem"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h3l1.5 4-2 1.2c1 2.1 2.8 3.9 4.9 4.9L11.6 11l4 1.5v3A1.5 1.5 0 0114 17C7.37 17 2 11.63 2 5a1.5 1.5 0 011.5-1.5H3z" stroke="#00a8d8" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="ci-text"><strong>Phone</strong>+1 (905) 555-0192</div></div>
-      <div class="citem"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="1.5" stroke="#00a8d8" stroke-width="1.4"/><path d="M2 6l7 5 7-5" stroke="#00a8d8" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="ci-text"><strong>Email</strong>dispatch@chlogistics.ca</div></div>
-      <div class="citem"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#00a8d8" stroke-width="1.4"/><path d="M9 5v4l3 2" stroke="#00a8d8" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="ci-text"><strong>Dispatch Hours</strong>24 / 7 &mdash; 365 days a year</div></div>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-vis fade-up">
+      <div class="about-badge">Burlington, ON</div>
+      <div class="about-img">
+        <svg viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="abg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0e1a3f" />
+              <stop offset="100%" stop-color="#1a2b6d" />
+            </linearGradient>
+          </defs>
+          <rect width="520" height="390" fill="url(#abg)" />
+          <rect y="280" width="520" height="110" fill="#0a1228" />
+          <rect y="276" width="520" height="6" fill="#1a2b6d" />
+          <rect x="30" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3" />
+          <rect x="170" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3" />
+          <rect x="310" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3" />
+          <rect x="450" y="335" width="65" height="4" rx="2" fill="#00a8d8" opacity="0.3" />
+          <ellipse cx="260" cy="280" rx="320" ry="14" fill="#00a8d8" opacity="0.07" />
+          <rect x="20" y="172" width="320" height="108" rx="3" fill="#152258" stroke="#1a6fc4" stroke-width="1.5" />
+          <rect x="20" y="172" width="320" height="4" fill="#00a8d8" opacity="0.8" />
+          <text x="180" y="230" font-family="Barlow Condensed, Arial Black, sans-serif" font-size="22" font-weight="900"
+            fill="white" opacity="0.95" text-anchor="middle" letter-spacing="1">CH LOGISTICS</text>
+          <text x="180" y="248" font-family="Barlow Condensed, sans-serif" font-size="9" fill="#00a8d8" opacity="0.85"
+            text-anchor="middle" letter-spacing="3.5">BURLINGTON · ONTARIO</text>
+          <rect x="332" y="186" width="116" height="94" rx="5" fill="#1a2b6d" stroke="#1a6fc4" stroke-width="1.5" />
+          <rect x="350" y="194" width="66" height="44" rx="3" fill="#00a8d8" opacity="0.12" stroke="#00a8d8"
+            stroke-width="1.2" stroke-opacity="0.35" />
+          <rect x="332" y="234" width="116" height="3" fill="#00a8d8" opacity="0.4" />
+          <rect x="438" y="162" width="7" height="26" rx="2" fill="#1a6fc4" />
+          <circle cx="88" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5" />
+          <circle cx="88" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5" />
+          <circle cx="88" cy="290" r="5" fill="#00a8d8" opacity="0.5" />
+          <circle cx="200" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5" />
+          <circle cx="200" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5" />
+          <circle cx="200" cy="290" r="5" fill="#00a8d8" opacity="0.5" />
+          <circle cx="362" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5" />
+          <circle cx="362" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5" />
+          <circle cx="362" cy="290" r="5" fill="#00a8d8" opacity="0.5" />
+          <circle cx="432" cy="290" r="26" fill="#0a1228" stroke="#1a6fc4" stroke-width="2.5" />
+          <circle cx="432" cy="290" r="15" fill="#111e42" stroke="#00a8d8" stroke-width="1.5" stroke-opacity="0.5" />
+          <circle cx="432" cy="290" r="5" fill="#00a8d8" opacity="0.5" />
+          <ellipse cx="448" cy="222" rx="8" ry="6" fill="#00a8d8" opacity="0.7" />
+          <path d="M456 219 L520 208" stroke="#00a8d8" stroke-width="1" opacity="0.18" />
+          <path d="M456 225 L520 236" stroke="#00a8d8" stroke-width="1" opacity="0.12" />
+        </svg>
+      </div>
+      <div class="about-block"></div>
     </div>
-  </div>
-  <div class="cform fade-up" style="transition-delay:0.15s">
-    <div class="frow">
-      <div class="fg"><label class="fl">First Name</label><input type="text" class="fi" placeholder="John"/></div>
-      <div class="fg"><label class="fl">Last Name</label><input type="text" class="fi" placeholder="Smith"/></div>
+    <div class="fade-up" style="transition-delay:0.15s">
+      <div class="s-label">About CH Logistics</div>
+      <h2 class="s-title">Built on<br>Reliability</h2>
+      <p class="about-body">CH Logistics is a Burlington, Ontario-based carrier with over 15 years of experience moving
+        freight across Canada and the United States. We started with a simple commitment: show up on time, every time.
+      </p>
+      <p class="about-body">Strategically located near the QEW and major border crossings, we serve clients in
+        manufacturing, retail, food &amp; beverage, and industrial sectors. Our team works around the clock to keep your
+        supply chain moving.</p>
+      <div class="about-list">
+        <div class="ali">
+          <div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></div>
+          <div class="ali-text"><strong>FMCSA &amp; Transport Canada Licensed</strong>Fully compliant for cross-border
+            ops</div>
+        </div>
+        <div class="ali">
+          <div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></div>
+          <div class="ali-text"><strong>Real-Time GPS Tracking</strong>Know where your load is, always</div>
+        </div>
+        <div class="ali">
+          <div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></div>
+          <div class="ali-text"><strong>24/7 Dispatch Support</strong>Day or night, someone&rsquo;s always on</div>
+        </div>
+        <div class="ali">
+          <div class="ali-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></div>
+          <div class="ali-text"><strong>Customs Brokerage Network</strong>Smooth border clearance, every time</div>
+        </div>
+      </div>
     </div>
-    <div class="fg"><label class="fl">Company</label><input type="text" class="fi" placeholder="Your Company Inc."/></div>
-    <div class="fg"><label class="fl">Email Address</label><input type="email" class="fi" placeholder="john@yourcompany.com"/></div>
-    <div class="frow">
-      <div class="fg"><label class="fl">Service Needed</label><select class="fs"><option value="">Select a service...</option><option>Full Truckload (FTL)</option><option>Less-Than-Truckload (LTL)</option><option>Cross-Border Transport</option><option>Dedicated Fleet</option><option>Expedited Freight</option><option>Temperature-Controlled</option></select></div>
-      <div class="fg"><label class="fl">Origin</label><input type="text" class="fi" placeholder="City, Province/State"/></div>
-    </div>
-    <div class="fg"><label class="fl">Destination</label><input type="text" class="fi" placeholder="City, Province/State"/></div>
-    <div class="fg"><label class="fl">Additional Details</label><textarea class="ft" placeholder="Freight type, weight, dimensions, pickup date..."></textarea></div>
-    <button class="fsub">Send Quote Request &rarr;</button>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="ft-top">
-    <div>
-      <img src="data:image/png;base64,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" alt="CH Logistics" class="ft-logo"/>
-      <p class="ft-desc">Burlington-based carrier delivering freight across Canada and the United States. On time. Every time.</p>
+  <!-- COVERAGE -->
+  <section id="coverage">
+    <div class="s-label">Where We Operate</div>
+    <h2 class="s-title fade-up">Canada &amp; U.S.<br>Coverage</h2>
+    <p class="sub fade-up">From coast to coast in Canada and all major U.S. markets &mdash; our network spans the full
+      breadth of North American freight lanes.</p>
+    <div class="map-wrap fade-up">
+      <svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="cg">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path
+          d="M60,58 L80,48 L140,43 L200,38 L280,36 L360,34 L440,36 L510,42 L560,50 L600,60 L630,78 L640,98 L635,123 L620,143 L600,156 L575,160 L555,153 L535,146 L510,153 L495,168 L485,186 L470,198 L445,203 L420,196 L400,190 L378,193 L365,208 L360,226 L352,238 L335,243 L315,238 L300,228 L280,230 L265,243 L255,260 L248,276 L238,266 L225,256 L208,253 L192,258 L178,268 L165,276 L148,273 L132,263 L118,253 L105,246 L92,240 L78,236 L65,226 L55,213 L48,196 L44,178 L42,158 L44,136 L48,116 L54,96 L60,78 Z"
+          fill="rgba(0,168,216,0.08)" stroke="rgba(0,168,216,0.3)" stroke-width="1.5" />
+        <path
+          d="M44,136 L40,118 L30,103 L20,93 L15,78 L18,63 L28,56 L38,54 L48,58 L55,70 L58,86 L55,103 L50,118 L46,133 Z"
+          fill="rgba(0,168,216,0.05)" stroke="rgba(0,168,216,0.2)" stroke-width="1" />
+        <path
+          d="M105,246 L118,253 L132,263 L148,273 L165,276 L178,268 L192,258 L208,253 L225,256 L238,266 L248,276 L255,260 L265,243 L280,230 L300,228 L315,238 L335,243 L352,238 L360,226 L365,208 L378,193 L400,190 L420,196 L445,203 L470,198 L485,186 L495,168 L510,153 L535,146 L555,153 L575,160 L600,156 L615,163 L625,180 L630,198 L628,216 L620,233 L610,250 L605,268 L608,286 L615,303 L618,323 L612,340 L600,353 L580,360 L558,363 L535,360 L510,356 L485,358 L460,363 L435,366 L410,364 L385,360 L360,363 L335,368 L310,373 L285,376 L260,373 L238,366 L218,358 L200,350 L182,340 L165,328 L150,316 L136,304 L122,293 L110,280 L100,266 L97,253 Z"
+          fill="rgba(96,165,250,0.07)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5" />
+        <path d="M460,363 L468,378 L472,393 L468,406 L458,413 L448,408 L443,393 L445,376 L452,365 Z"
+          fill="rgba(96,165,250,0.06)" stroke="rgba(96,165,250,0.2)" stroke-width="1" />
+        <path d="M105,246 L192,258 L255,260 L280,230 L335,243 L360,226 L378,193 L445,203 L495,168 L555,153 L600,156"
+          stroke="rgba(0,168,216,0.5)" stroke-width="1.5" stroke-dasharray="6 4" fill="none" />
+        <circle cx="430" cy="216" r="8" fill="#00a8d8" filter="url(#cg)" />
+        <circle cx="430" cy="216" r="4" fill="white" />
+        <text x="444" y="211" font-family="Barlow Condensed, sans-serif" font-size="11" font-weight="700" fill="#00a8d8"
+          letter-spacing="1">BURLINGTON, ON</text>
+        <text x="444" y="223" font-family="Barlow Condensed, sans-serif" font-size="9" fill="rgba(255,255,255,0.4)"
+          letter-spacing="0.5">HEADQUARTERS</text>
+        <line x1="430" y1="216" x2="198" y2="103" stroke="rgba(0,168,216,0.25)" stroke-width="1.5"
+          stroke-dasharray="4 3" />
+        <line x1="430" y1="216" x2="578" y2="118" stroke="rgba(0,168,216,0.2)" stroke-width="1.5"
+          stroke-dasharray="4 3" />
+        <line x1="430" y1="216" x2="93" y2="188" stroke="rgba(0,168,216,0.18)" stroke-width="1.2"
+          stroke-dasharray="4 3" />
+        <line x1="430" y1="216" x2="338" y2="313" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"
+          stroke-dasharray="4 3" />
+        <line x1="430" y1="216" x2="498" y2="318" stroke="rgba(96,165,250,0.25)" stroke-width="1.5"
+          stroke-dasharray="4 3" />
+        <line x1="430" y1="216" x2="218" y2="318" stroke="rgba(96,165,250,0.22)" stroke-width="1.2"
+          stroke-dasharray="4 3" />
+        <circle cx="198" cy="103" r="4" fill="rgba(0,168,216,0.7)" /><text x="210" y="107"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Vancouver</text>
+        <circle cx="308" cy="93" r="4" fill="rgba(0,168,216,0.7)" /><text x="313" y="88"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Calgary</text>
+        <circle cx="378" cy="88" r="4" fill="rgba(0,168,216,0.7)" /><text x="383" y="84"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Winnipeg</text>
+        <circle cx="418" cy="103" r="4" fill="rgba(0,168,216,0.7)" /><text x="408" y="98"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Toronto</text>
+        <circle cx="488" cy="106" r="4" fill="rgba(0,168,216,0.7)" /><text x="493" y="102"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Montréal</text>
+        <circle cx="578" cy="118" r="4" fill="rgba(0,168,216,0.7)" /><text x="583" y="114"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Halifax</text>
+        <circle cx="338" cy="313" r="4" fill="rgba(96,165,250,0.7)" /><text x="346" y="318"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Chicago</text>
+        <circle cx="218" cy="318" r="4" fill="rgba(96,165,250,0.7)" /><text x="163" y="314"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Minneapolis</text>
+        <circle cx="463" cy="286" r="4" fill="rgba(96,165,250,0.7)" /><text x="468" y="282"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">New York</text>
+        <circle cx="498" cy="318" r="4" fill="rgba(96,165,250,0.7)" /><text x="503" y="314"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Philadelphia</text>
+        <circle cx="278" cy="346" r="4" fill="rgba(96,165,250,0.7)" /><text x="223" y="343"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Kansas City</text>
+        <circle cx="378" cy="356" r="4" fill="rgba(96,165,250,0.7)" /><text x="368" y="368"
+          font-family="Barlow Condensed, sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">Nashville</text>
+        <text x="295" y="158" font-family="Barlow Condensed, sans-serif" font-size="17" font-weight="700"
+          fill="rgba(0,168,216,0.12)" letter-spacing="6" text-anchor="middle">CANADA</text>
+        <text x="358" y="293" font-family="Barlow Condensed, sans-serif" font-size="17" font-weight="700"
+          fill="rgba(96,165,250,0.1)" letter-spacing="6" text-anchor="middle">UNITED STATES</text>
+      </svg>
     </div>
-    <div>
-      <div class="ft-col-title">Services</div>
-      <ul class="ft-links">
-        <li><a href="#services">Full Truckload</a></li>
-        <li><a href="#services">LTL Shipping</a></li>
-        <li><a href="#services">Cross-Border</a></li>
-        <li><a href="#services">Dedicated Fleet</a></li>
-        <li><a href="#services">Expedited Freight</a></li>
-      </ul>
+    <div class="cpills fade-up">
+      <div class="cpill"><span class="pd ca"></span>All Canadian Provinces &amp; Territories</div>
+      <div class="cpill"><span class="pd us"></span>All 48 Contiguous U.S. States</div>
+      <div class="cpill"><span class="pd ca"></span>Cross-Border Canada &harr; USA</div>
     </div>
-    <div>
-      <div class="ft-col-title">Company</div>
-      <ul class="ft-links">
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#why">Why CH Logistics</a></li>
-        <li><a href="#coverage">Coverage Map</a></li>
-        <li><a href="#contact">Careers</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="ft-col-title">Contact</div>
-      <ul class="ft-links">
-        <li><a href="tel:+19055550192">+1 (905) 555-0192</a></li>
-        <li><a href="mailto:dispatch@chlogistics.ca">dispatch@chlogistics.ca</a></li>
-        <li><a href="#contact">Get a Quote</a></li>
-        <li><a href="#contact">Track Shipment</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="ft-bot">
-    <span class="ft-copy">&copy; 2025 CH Logistics Inc. All rights reserved. Burlington, Ontario, Canada.</span>
-    <span class="ft-tag">Moving Canada &amp; the USA</span>
-  </div>
-</footer>
+  </section>
 
-<script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  document.querySelectorAll('#hero .fade-up').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
-  });
-</script>
+  <!-- WHY -->
+  <section id="why">
+    <div class="s-label">Why CH Logistics</div>
+    <h2 class="s-title fade-up">The Difference<br>Is in the Details</h2>
+    <div class="why-grid">
+      <div class="why-item fade-up">
+        <div class="why-num">01</div>
+        <div class="why-title">On-Time Performance</div>
+        <p class="why-desc">Our operations are built around schedule adherence. When we commit to a delivery window, we
+          honour it &mdash; with contingency planning baked into every run.</p>
+      </div>
+      <div class="why-item fade-up" style="transition-delay:0.1s">
+        <div class="why-num">02</div>
+        <div class="why-title">Cross-Border Expertise</div>
+        <p class="why-desc">Years at Canadian-American border crossings means zero surprises. We handle documentation,
+          compliance, and customs coordination so you don&rsquo;t have to.</p>
+      </div>
+      <div class="why-item fade-up" style="transition-delay:0.2s">
+        <div class="why-num">03</div>
+        <div class="why-title">Modern Fleet</div>
+        <p class="why-desc">A well-maintained, late-model fleet with GPS tracking, ELD systems, and safety monitoring.
+          Fewer breakdowns, better visibility, greater peace of mind.</p>
+      </div>
+      <div class="why-item fade-up" style="transition-delay:0.3s">
+        <div class="why-num">04</div>
+        <div class="why-title">Local Roots, National Reach</div>
+        <p class="why-desc">Burlington-based and personally invested in every client relationship. Large enough for
+          volume, small enough to pick up the phone when it matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="fade-up">
+      <div class="s-label">Get in Touch</div>
+      <h2 class="s-title">Request<br>a Quote</h2>
+      <p class="cdesc">Tell us about your shipment and we&rsquo;ll get back to you with a competitive rate within 24
+        hours.</p>
+      <div class="cdetails">
+        <div class="citem">
+          <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path
+                d="M9 1C5.686 1 3 3.686 3 7c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z"
+                stroke="#00a8d8" stroke-width="1.4" />
+            </svg></div>
+          <div class="ci-text"><strong>Head Office</strong>Burlington, Ontario, Canada</div>
+        </div>
+        <div class="citem">
+          <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path
+                d="M3 3h3l1.5 4-2 1.2c1 2.1 2.8 3.9 4.9 4.9L11.6 11l4 1.5v3A1.5 1.5 0 0114 17C7.37 17 2 11.63 2 5a1.5 1.5 0 011.5-1.5H3z"
+                stroke="#00a8d8" stroke-width="1.4" stroke-linejoin="round" />
+            </svg></div>
+          <div class="ci-text"><strong>Phone</strong>+1 (905) 555-0192</div>
+        </div>
+        <div class="citem">
+          <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="2" y="4" width="14" height="10" rx="1.5" stroke="#00a8d8" stroke-width="1.4" />
+              <path d="M2 6l7 5 7-5" stroke="#00a8d8" stroke-width="1.4" stroke-linecap="round" />
+            </svg></div>
+          <div class="ci-text"><strong>Email</strong>dispatch@chlogistics.ca</div>
+        </div>
+        <div class="citem">
+          <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="7" stroke="#00a8d8" stroke-width="1.4" />
+              <path d="M9 5v4l3 2" stroke="#00a8d8" stroke-width="1.4" stroke-linecap="round" />
+            </svg></div>
+          <div class="ci-text"><strong>Dispatch Hours</strong>24 / 7 &mdash; 365 days a year</div>
+        </div>
+      </div>
+    </div>
+    <div class="cform fade-up" style="transition-delay:0.15s">
+      <div class="frow">
+        <div class="fg"><label class="fl">First Name</label><input type="text" class="fi" placeholder="John" /></div>
+        <div class="fg"><label class="fl">Last Name</label><input type="text" class="fi" placeholder="Smith" /></div>
+      </div>
+      <div class="fg"><label class="fl">Company</label><input type="text" class="fi" placeholder="Your Company Inc." />
+      </div>
+      <div class="fg"><label class="fl">Email Address</label><input type="email" class="fi"
+          placeholder="john@yourcompany.com" /></div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Service Needed</label><select class="fs">
+            <option value="">Select a service...</option>
+            <option>Full Truckload (FTL)</option>
+            <option>Less-Than-Truckload (LTL)</option>
+            <option>Cross-Border Transport</option>
+            <option>Dedicated Fleet</option>
+            <option>Expedited Freight</option>
+            <option>Temperature-Controlled</option>
+          </select></div>
+        <div class="fg"><label class="fl">Origin</label><input type="text" class="fi"
+            placeholder="City, Province/State" /></div>
+      </div>
+      <div class="fg"><label class="fl">Destination</label><input type="text" class="fi"
+          placeholder="City, Province/State" /></div>
+      <div class="fg"><label class="fl">Additional Details</label><textarea class="ft"
+          placeholder="Freight type, weight, dimensions, pickup date..."></textarea></div>
+      <button class="fsub">Send Quote Request &rarr;</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-top">
+      <div>
+        <img
+          src="data:image/png;base64,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"
+          alt="CH Logistics" class="ft-logo" />
+        <p class="ft-desc">Burlington-based carrier delivering freight across Canada and the United States. On time.
+          Every time.</p>
+      </div>
+      <div>
+        <div class="ft-col-title">Services</div>
+        <ul class="ft-links">
+          <li><a href="#services">Full Truckload</a></li>
+          <li><a href="#services">LTL Shipping</a></li>
+          <li><a href="#services">Cross-Border</a></li>
+          <li><a href="#services">Dedicated Fleet</a></li>
+          <li><a href="#services">Expedited Freight</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-title">Company</div>
+        <ul class="ft-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why">Why CH Logistics</a></li>
+          <li><a href="#coverage">Coverage Map</a></li>
+          <li><a href="#contact">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-title">Contact</div>
+        <ul class="ft-links">
+          <li><a href="tel:+19055550192">+1 (905) 555-0192</a></li>
+          <li><a href="mailto:dispatch@chlogistics.ca">dispatch@chlogistics.ca</a></li>
+          <li><a href="#contact">Get a Quote</a></li>
+          <li><a href="#contact">Track Shipment</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">&copy; 2025 CH Logistics Inc. All rights reserved. Burlington, Ontario, Canada.</span>
+      <span class="ft-tag">Moving Canada &amp; the USA</span>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    document.querySelectorAll('#hero .fade-up').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
+    });
+  </script>
 </body>
+
 </html>
