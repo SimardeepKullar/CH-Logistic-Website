@@ -436,76 +436,7 @@
 	</footer>
 
 	<script>
-		// ── QUOTE FORM ──────────────────────────────────────────────
-		document.getElementById('q-submit').addEventListener('click', async () => {
-			const btn = document.getElementById('q-submit');
-			const errBox = document.getElementById('form-error');
-			const successBox = document.getElementById('form-success');
-
-			// Read values
-			const firstName = document.getElementById('q-fname').value.trim();
-			const lastName = document.getElementById('q-lname').value.trim();
-			const company = document.getElementById('q-company').value.trim();
-			const email = document.getElementById('q-email').value.trim();
-			const service = document.getElementById('q-service').value;
-			const origin = document.getElementById('q-origin').value.trim();
-			const destination = document.getElementById('q-dest').value.trim();
-			const details = document.getElementById('q-details').value.trim();
-
-			// Reset state
-			errBox.style.display = 'none';
-			successBox.style.display = 'none';
-
-			// Validate
-			if (!firstName || !email || !origin || !destination) {
-				errBox.textContent = 'Please fill in your name, email, origin, and destination.';
-				errBox.style.display = 'block';
-				return;
-			}
-			if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-				errBox.textContent = 'Please enter a valid email address.';
-				errBox.style.display = 'block';
-				return;
-			}
-
-			// Loading state
-			btn.disabled = true;
-			btn.textContent = 'Sending…';
-
-			try {
-				const res = await fetch('/api/quote', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ firstName, lastName, company, email, service, origin, destination, details }),
-				});
-
-				const data = await res.json();
-
-				if (res.ok && data.success) {
-					// Success — show message, hide form fields
-					successBox.style.display = 'block';
-					btn.style.display = 'none';
-					// Clear fields
-					['q-fname', 'q-lname', 'q-company', 'q-email', 'q-service', 'q-origin', 'q-dest', 'q-details']
-						.forEach(id => {
-							const el = document.getElementById(id);
-							if (el) el.value = '';
-						});
-				} else {
-					errBox.textContent = data.error || 'Something went wrong. Please try again or call us directly.';
-					errBox.style.display = 'block';
-					btn.disabled = false;
-					btn.textContent = 'Send Quote Request →';
-				}
-			} catch (err) {
-				errBox.textContent = 'Network error. Please check your connection and try again.';
-				errBox.style.display = 'block';
-				btn.disabled = false;
-				btn.textContent = 'Send Quote Request →';
-			}
-		});
-
-		// ── SVG MAP LOADER ──────────────────────────────────────────
+    // ── SVG MAP LOADER ──────────────────────────────────────────
 		fetch('map.svg')
 			.then(r => r.text())
 			.then(svgText => {
@@ -524,7 +455,7 @@
 			setTimeout(() => el.classList.add('visible'), 150);
 		});
 
-		// ── SMOOTH SCROLL ───────────────────────────────────────────
+	// ── SMOOTH SCROLL ───────────────────────────────────────────
 		document.querySelectorAll('a[href^="#"]').forEach(a => {
 			a.addEventListener('click', e => {
 				e.preventDefault();
@@ -532,7 +463,76 @@
 				if (t) t.scrollIntoView({ behavior: 'smooth' });
 			});
 		});
-	</script>
+	
+	// ── QUOTE FORM ──────────────────────────────────────────────
+    document.getElementById('q-submit').addEventListener('click', async () => {
+      const btn = document.getElementById('q-submit');
+      const errBox = document.getElementById('form-error');
+      const successBox = document.getElementById('form-success');
+
+      // Read values
+      const firstName = document.getElementById('q-fname').value.trim();
+      const lastName = document.getElementById('q-lname').value.trim();
+      const company = document.getElementById('q-company').value.trim();
+      const email = document.getElementById('q-email').value.trim();
+      const service = document.getElementById('q-service').value;
+      const origin = document.getElementById('q-origin').value.trim();
+      const destination = document.getElementById('q-dest').value.trim();
+      const details = document.getElementById('q-details').value.trim();
+
+      // Reset state
+      errBox.style.display = 'none';
+      successBox.style.display = 'none';
+
+      // Validate
+      if (!firstName || !email || !origin || !destination) {
+        errBox.textContent = 'Please fill in your name, email, origin, and destination.';
+        errBox.style.display = 'block';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errBox.textContent = 'Please enter a valid email address.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      // Loading state
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch('/api/quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ firstName, lastName, company, email, service, origin, destination, details }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          // Success — show message, hide form fields
+          successBox.style.display = 'block';
+          btn.style.display = 'none';
+          // Clear fields
+          ['q-fname', 'q-lname', 'q-company', 'q-email', 'q-service', 'q-origin', 'q-dest', 'q-details']
+            .forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.value = '';
+            });
+        } else {
+          errBox.textContent = data.error || 'Something went wrong. Please try again or call us directly.';
+          errBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Send Quote Request →';
+        }
+      } catch (err) {
+        errBox.textContent = 'Network error. Please check your connection and try again.';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Send Quote Request →';
+      }
+    });
+  </script>
 </body>
 
 </html>
