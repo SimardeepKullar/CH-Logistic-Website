@@ -1,38 +1,38 @@
 module.exports = async function handler(req, res) {
-    // Only allow POST
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
+	// Only allow POST
+	if (req.method !== 'POST') {
+		return res.status(405).json({ error: 'Method not allowed' });
+	}
 
-    const {
-        firstName,
-        lastName,
-        company,
-        email,
-        service,
-        origin,
-        destination,
-        details,
-    } = req.body;
+	const {
+		firstName,
+		lastName,
+		company,
+		email,
+		service,
+		origin,
+		destination,
+		details,
+	} = req.body;
 
-    // Basic validation
-    if (!firstName || !email || !origin || !destination) {
-        return res.status(400).json({ error: 'Missing required fields.' });
-    }
+	// Basic validation
+	if (!firstName || !email || !origin || !destination) {
+		return res.status(400).json({ error: 'Missing required fields.' });
+	}
 
-    try {
-        const response = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                from: 'CH Logistics Quote Form <onboarding@resend.dev>',
-                to: ['simardeepk7@gmail.com'], // TODO: swap to dispatch@chlogistic.ca once domain is verified
-                reply_to: email,
-                subject: `New Quote Request — ${origin} → ${destination}`,
-                html: `
+	try {
+		const response = await fetch('https://api.resend.com/emails', {
+			method: 'POST',
+			headers: {
+				'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				from: 'CH Logistics Quote Form <onboarding@resend.dev>',
+				to: ['simardeepk7@gmail.com'], // TODO: swap to dispatch@chlogistic.ca once domain is verified
+				reply_to: email,
+				subject: `New Quote Request — ${origin} → ${destination}`,
+				html: `
           <!DOCTYPE html>
           <html>
           <head>
@@ -84,21 +84,19 @@ module.exports = async function handler(req, res) {
                   <div class="field-label">Service</div>
                   <div class="field-value">${service || 'Not specified'}</div>
                 </div>
-                <div class="route-box">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td style="vertical-align:middle; width:42%;">
-                        <div class="field-label">From</div>
-                        <div class="route-city">${origin}</div>
-                      </td>
-                      <td class="route-arrow" style="vertical-align:middle; text-align:center; width:16%;">&#8594;</td>
-                      <td style="vertical-align:middle; width:42%;">
-                        <div class="field-label">To</div>
-                        <div class="route-city">${destination}</div>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f6fb; border:1px solid #d0daea; border-radius:4px; margin:16px 0;">
+                  <tr>
+                    <td width="44%" style="padding:16px 0 16px 20px; vertical-align:middle;">
+                      <div style="font-size:11px; color:#6b7a99; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">From</div>
+                      <div style="font-size:16px; font-weight:700; color:#1a2b6d;">${origin}</div>
+                    </td>
+                    <td width="12%" style="text-align:center; vertical-align:middle; font-size:24px; font-weight:700; color:#00a8d8; padding:0;">&#8594;</td>
+                    <td width="44%" style="padding:16px 20px 16px 0; vertical-align:middle;">
+                      <div style="font-size:11px; color:#6b7a99; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">To</div>
+                      <div style="font-size:16px; font-weight:700; color:#1a2b6d;">${destination}</div>
+                    </td>
+                  </tr>
+                </table>
 
                 ${details ? `
                 <div class="section-title">Additional Details</div>
@@ -111,19 +109,19 @@ module.exports = async function handler(req, res) {
           </body>
           </html>
         `,
-            }),
-        });
+			}),
+		});
 
-        if (!response.ok) {
-            const error = await response.json();
-            console.error('Resend error:', error);
-            return res.status(500).json({ error: 'Failed to send email.' });
-        }
+		if (!response.ok) {
+			const error = await response.json();
+			console.error('Resend error:', error);
+			return res.status(500).json({ error: 'Failed to send email.' });
+		}
 
-        return res.status(200).json({ success: true });
+		return res.status(200).json({ success: true });
 
-    } catch (err) {
-        console.error('Server error:', err);
-        return res.status(500).json({ error: 'Server error.' });
-    }
+	} catch (err) {
+		console.error('Server error:', err);
+		return res.status(500).json({ error: 'Server error.' });
+	}
 }
