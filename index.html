@@ -19,6 +19,57 @@
     .usa     { fill: rgba(96, 165, 250, 0.08); stroke: rgba(96, 165, 250, 0.3); stroke-width: 1; }
     .mexico  { fill: rgba(0, 168, 216, 0.05); stroke: rgba(0, 168, 216, 0.1);  stroke-width: 1; }
     .locations { fill: #00a8d8; }
+
+    /* ── COVERAGE TWO-COLUMN ── */
+    #coverage {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 100px 80px;
+    }
+    .coverage-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .coverage-text .s-title { color: #fff; }
+    .coverage-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .cpills {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cpill {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 11px 18px;
+      font-family: var(--fh); font-size: 0.85rem;
+      font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.8);
+    }
+    .pd { width: 9px; height: 9px; border-radius: 50%; }
+    .pd.ca { background: #00a8d8; }
+    .pd.us { background: #60a5fa; }
+    .map-wrap {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 16px;
+    }
+    @media (max-width: 1100px) {
+      .coverage-inner { grid-template-columns: 1fr; gap: 40px; }
+      #coverage { padding: 80px 40px; }
+      .cpills { flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 640px) {
+      #coverage { padding: 60px 20px; }
+      .cpills { flex-direction: column; }
+    }
   </style>
 </head>
 
@@ -246,17 +297,29 @@
 
   <!-- COVERAGE -->
   <section id="coverage">
-    <div class="s-label">Where We Operate</div>
-    <h2 class="s-title fade-up">Canada &amp; U.S.<br>Coverage</h2>
-    <p class="sub fade-up">From coast to coast in Canada and all major U.S. markets &mdash; our network spans the full
-      breadth of North American freight lanes.</p>
-    <div class="map-wrap fade-up" id="map-wrap">
-      <!-- map.svg loaded here by JS -->
-    </div>
-    <div class="cpills fade-up">
-      <div class="cpill"><span class="pd ca"></span>All Canadian Provinces &amp; Territories</div>
-      <div class="cpill"><span class="pd us"></span>All 48 Contiguous U.S. States</div>
-      <div class="cpill"><span class="pd ca"></span>Cross-Border Canada &harr; USA</div>
+    <div class="coverage-inner">
+
+      <!-- LEFT: text -->
+      <div class="coverage-text fade-up">
+        <div class="s-label">Where We Operate</div>
+        <h2 class="s-title">Canada &amp; U.S.<br>Coverage</h2>
+        <p class="coverage-desc">
+          From coast to coast in Canada and all major U.S. markets &mdash; our network spans the full breadth of North American freight lanes.
+        </p>
+        <div class="cpills">
+          <div class="cpill"><span class="pd ca"></span>All Canadian Provinces &amp; Territories</div>
+          <div class="cpill"><span class="pd us"></span>All 48 Contiguous U.S. States</div>
+          <div class="cpill"><span class="pd ca"></span>Cross-Border Canada &harr; USA</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: map -->
+      <div class="coverage-map-col fade-up" style="transition-delay:0.15s">
+        <div class="map-wrap" id="map-wrap">
+          <!-- map.svg injected here by JS -->
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -321,7 +384,7 @@
               <rect x="2" y="4" width="14" height="10" rx="1.5" stroke="#00a8d8" stroke-width="1.4" />
               <path d="M2 6l7 5 7-5" stroke="#00a8d8" stroke-width="1.4" stroke-linecap="round" />
             </svg></div>
-          <div class="ci-text"><strong>Email</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e5818c96958491868da5868d898a828c96918c8696cb8684">[email&#160;protected]</a></div>
+          <div class="ci-text"><strong>Email</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbafa2b8bbaabfa8a38ba8a3a7a4aca2b8bfa2a8b8e5a8aa">[email&#160;protected]</a></div>
         </div>
         <div class="citem">
           <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -393,7 +456,7 @@
         <div class="ft-col-title">Contact</div>
         <ul class="ft-links">
           <li><a href="tel:+19057961062">+1 (905) 796-1062</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#86e2eff5f6e7f2e5eec6e5eeeae9e1eff5f2efe5f5a8e5e7"><span class="__cf_email__" data-cfemail="5a3e33292a3b2e39321a393236353d33292e33392974393b">[email&#160;protected]</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#e2868b91928396818aa2818a8e8d858b91968b8191cc8183"><span class="__cf_email__" data-cfemail="5a3e33292a3b2e39321a393236353d33292e33392974393b">[email&#160;protected]</span></a></li>
           <li><a href="#contact">Get a Quote</a></li>
           <li><a href="#contact">Track Shipment</a></li>
         </ul>
@@ -406,18 +469,6 @@
   </footer>
 
   <script>
-    // ── SCROLL ANIMATIONS ───────────────────────────────────────
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-    // Fire hero content immediately on load
-    document.querySelectorAll('#hero .fade-up').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 150);
-    });
-
-
     // ── SVG MAP LOADER ──────────────────────────────────────────
     fetch('map.svg')
       .then(r => r.text())
@@ -426,6 +477,17 @@
         if (wrap) wrap.innerHTML = svgText;
       })
       .catch(() => console.warn('map.svg could not be loaded'));
+
+    // ── SCROLL ANIMATIONS ───────────────────────────────────────
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    document.querySelectorAll('#hero .fade-up').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 150);
+    });
+
     // ── SMOOTH SCROLL ───────────────────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
