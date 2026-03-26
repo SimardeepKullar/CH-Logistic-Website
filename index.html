@@ -11,60 +11,6 @@
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css">
-  <style>
-	
-
-    /* ── COVERAGE TWO-COLUMN ── */
-    #coverage {
-      background: var(--dark);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 100px 80px;
-    }
-    .coverage-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .coverage-text .s-title { color: #fff; }
-    .coverage-desc {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.75;
-      margin-bottom: 36px;
-    }
-    .cpills {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .cpill {
-      display: flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 11px 18px;
-      font-family: var(--fh); font-size: 0.85rem;
-      font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.8);
-    }
-    .pd { width: 9px; height: 9px; border-radius: 50%; }
-    .pd.ca { background: #00a8d8; }
-    .pd.us { background: #60a5fa; }
-    .map-wrap {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 16px;
-    }
-    @media (max-width: 1100px) {
-      .coverage-inner { grid-template-columns: 1fr; gap: 40px; }
-      #coverage { padding: 80px 40px; }
-      .cpills { flex-direction: row; flex-wrap: wrap; }
-    }
-    @media (max-width: 640px) {
-      #coverage { padding: 60px 20px; }
-      .cpills { flex-direction: column; }
-    }
-  </style>
 </head>
 
 <body>
@@ -292,13 +238,13 @@
 
   <!-- COVERAGE -->
   <section id="coverage">
-    <div class="coverage-inner">
+    <div id="coverage-inner">
 
       <!-- LEFT: text -->
       <div class="coverage-text fade-up">
         <div class="s-label">Where We Operate</div>
         <h2 class="s-title">Canada &amp; U.S.<br>Coverage</h2>
-        <p class="coverage-desc">
+        <p id="coverage-desc">
           From coast to coast in Canada and all major U.S. markets &mdash; our network spans the full breadth of North American freight lanes.
         </p>
         <div class="cpills">
