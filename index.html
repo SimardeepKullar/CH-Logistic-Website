@@ -176,7 +176,7 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="about-photo-wrap fade-up">
-      <div class="about-photo-badge">Burlington, ON HQ</div>
+      <div class="about-photo-badge">Burlington, ON</div>
       <div class="about-photo"></div>
       <div class="about-photo-accent"></div>
     </div>
@@ -424,10 +424,7 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-    document.querySelectorAll('#hero .fade-up').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 150);
-    });
+	document.querySelectorAll('#hero .fade-up').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
 
     // ── SMOOTH SCROLL ───────────────────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(a => {
