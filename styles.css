@@ -52,6 +52,10 @@ nav {
   transition: background 0.3s;
 }
 
+.nav-logo-container {height: 100%;
+  width: auto;
+  display: block}
+
 .nav-logo {
   height: 100%;
   width: auto;
