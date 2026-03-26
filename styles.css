@@ -124,7 +124,8 @@ nav {
 .hero-photo {
   position: absolute;
   inset: 0;
-  background: url('images/truck-front.jpg');
+  background: url('images/truck-front.jpg') no-repeat;
+  background-size: cover;
 }
 
 .hero-overlay {
