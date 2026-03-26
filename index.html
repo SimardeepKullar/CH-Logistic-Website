@@ -470,3 +470,105 @@
         <ul class="ft-links">
           <li><a href="tel:+19057961062">+1 (905) 796-1062</a></li>
           <li><a href="/cdn-cgi/l/email-protection#90f4f9e3e0f1e4f3f8d0f3f8fcfff7f9e3e4f9f3e3bef3f1"><span
+                class="__cf_email__"
+                data-cfemail="0b6f62787b6a7f68634b686367646c62787f62687825686a">[email&#160;protected]</span></a></li>
+          <li><a href="#contact">Get a Quote</a></li>
+          <li><a href="#contact">Track Shipment</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">&copy; 2025 CH Logistics Inc. All rights reserved. Burlington, Ontario, Canada.</span>
+      <span class="ft-tag">Moving You Forward&hellip;</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── QUOTE FORM ──────────────────────────────────────────────
+    document.getElementById('q-submit').addEventListener('click', async () => {
+      const btn = document.getElementById('q-submit');
+      const errBox = document.getElementById('form-error');
+      const successBox = document.getElementById('form-success');
+
+      // Read values
+      const firstName = document.getElementById('q-fname').value.trim();
+      const lastName = document.getElementById('q-lname').value.trim();
+      const company = document.getElementById('q-company').value.trim();
+      const email = document.getElementById('q-email').value.trim();
+      const service = document.getElementById('q-service').value;
+      const origin = document.getElementById('q-origin').value.trim();
+      const destination = document.getElementById('q-dest').value.trim();
+      const details = document.getElementById('q-details').value.trim();
+
+      // Reset state
+      errBox.style.display = 'none';
+      successBox.style.display = 'none';
+
+      // Validate
+      if (!firstName || !email || !origin || !destination) {
+        errBox.textContent = 'Please fill in your name, email, origin, and destination.';
+        errBox.style.display = 'block';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errBox.textContent = 'Please enter a valid email address.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      // Loading state
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch('/api/quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ firstName, lastName, company, email, service, origin, destination, details }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          // Success — show message, hide form fields
+          successBox.style.display = 'block';
+          btn.style.display = 'none';
+          // Clear fields
+          ['q-fname', 'q-lname', 'q-company', 'q-email', 'q-service', 'q-origin', 'q-dest', 'q-details']
+            .forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.value = '';
+            });
+        } else {
+          errBox.textContent = data.error || 'Something went wrong. Please try again or call us directly.';
+          errBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Send Quote Request →';
+        }
+      } catch (err) {
+        errBox.textContent = 'Network error. Please check your connection and try again.';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Send Quote Request →';
+      }
+    });
+
+    // ── SCROLL ANIMATIONS ───────────────────────────────────────
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    document.querySelectorAll('#hero .fade-up').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
+
+    // ── SMOOTH SCROLL ───────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+
+</html>
