@@ -49,9 +49,9 @@ module.exports = async function handler(req, res) {
               .field { margin-bottom: 14px; }
               .field-label { font-size: 11px; color: #6b7a99; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
               .field-value { font-size: 15px; color: #1a2340; font-weight: 500; }
-              .route-box { background: #f4f6fb; border: 1px solid #d0daea; border-radius: 4px; padding: 16px 20px; margin: 16px 0; display: flex; align-items: center; gap: 16px; }
-              .route-city { font-size: 16px; font-weight: 700; color: #1a2b6d; }
-              .route-arrow { color: #00a8d8; font-size: 20px; font-weight: 700; }
+              .route-box { background: #f4f6fb; border: 1px solid #d0daea; border-radius: 4px; padding: 16px 20px; margin: 16px 0; }
+              .route-city { font-size: 16px; font-weight: 700; color: #1a2b6d; margin-top: 4px; }
+              .route-arrow { color: #00a8d8; font-size: 22px; font-weight: 700; text-align: center; padding: 0 16px; }
               .details-box { background: #f4f6fb; border-left: 3px solid #00a8d8; padding: 14px 18px; border-radius: 0 4px 4px 0; font-size: 14px; color: #1a2340; line-height: 1.6; white-space: pre-wrap; }
               .footer { background: #0e1a3f; padding: 18px 32px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; }
             </style>
@@ -85,15 +85,19 @@ module.exports = async function handler(req, res) {
                   <div class="field-value">${service || 'Not specified'}</div>
                 </div>
                 <div class="route-box">
-                  <div>
-                    <div class="field-label">From</div>
-                    <div class="route-city">${origin}</div>
-                  </div>
-                  <div class="route-arrow">→</div>
-                  <div>
-                    <div class="field-label">To</div>
-                    <div class="route-city">${destination}</div>
-                  </div>
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="vertical-align:middle; width:42%;">
+                        <div class="field-label">From</div>
+                        <div class="route-city">${origin}</div>
+                      </td>
+                      <td class="route-arrow" style="vertical-align:middle; text-align:center; width:16%;">&#8594;</td>
+                      <td style="vertical-align:middle; width:42%;">
+                        <div class="field-label">To</div>
+                        <div class="route-city">${destination}</div>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
 
                 ${details ? `
