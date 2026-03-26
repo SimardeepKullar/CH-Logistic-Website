@@ -25,9 +25,11 @@
 ## 🟡 In Progress
 
 ### Careers / Job Application Page — `careers.html` + `api/apply.js`
-- [ ] Build `careers.html` — open positions, company culture section, application form
-- [ ] Build `api/apply.js` — serverless function to email applications to hiring inbox
-- [ ] Add Careers link to nav and footer (already linked, just needs the page)
+- [x] Built `careers.html` — perks section, open positions cards, application form
+- [x] Built `api/apply.js` — serverless function with resume + abstract as email attachments
+- [x] Position cards click-to-select pre-fill the dropdown and scroll to form
+- [ ] Add Careers link to nav in `index.html` (currently only in footer)
+- [ ] Swap `from` / `to` in `api/apply.js` once domain is verified (same as quote.js)
 
 ---
 
