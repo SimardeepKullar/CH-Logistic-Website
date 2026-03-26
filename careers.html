@@ -2,718 +2,533 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Careers — CH Logistics</title>
-  <link rel="icon" type="image/x-icon" href="images/ch-logo-favi.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* ── CAREERS PAGE STYLES ── */
-
-    .careers-hero {
-      min-height: 52vh;
-      padding-top: 72px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      background: var(--navy);
-    }
-    .careers-hero-photo {
-      position: absolute; inset: 0;
-      background: url('images/truck-inline-angle.jpg') center 40% / cover no-repeat;
-    }
-    .careers-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(105deg, rgba(14,26,63,0.93) 0%, rgba(26,43,109,0.82) 45%, rgba(26,111,196,0.45) 100%);
-    }
-    .careers-hero-content {
-      position: relative; z-index: 2;
-      padding: 70px 80px;
-    }
-    .careers-hero-content .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--fh); font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan);
-      margin-bottom: 20px;
-    }
-    .careers-hero-content .hero-eyebrow::before {
-      content: ''; display: block; width: 28px; height: 2px; background: var(--cyan);
-    }
-    .careers-hero-title {
-      font-family: var(--fh);
-      font-size: clamp(3.2rem, 6vw, 5.5rem);
-      font-weight: 900; line-height: 0.92;
-      text-transform: uppercase; color: #fff;
-      margin-bottom: 20px;
-    }
-    .careers-hero-title span { color: var(--cyan); }
-    .careers-hero-desc {
-      font-size: 1.05rem; color: rgba(255,255,255,0.65);
-      line-height: 1.75; max-width: 520px;
-    }
-
-    /* ── PERKS ── */
-    .perks-section {
-      background: var(--off);
-      border-top: 1px solid var(--border);
-      padding: 80px 80px;
-    }
-    .perks-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 32px; margin-top: 52px;
-    }
-    .perk-item {
-      border-top: 3px solid var(--border);
-      padding-top: 24px;
-      transition: border-color 0.3s;
-    }
-    .perk-item:hover { border-color: var(--cyan); }
-    .perk-icon {
-      width: 42px; height: 42px; margin-bottom: 16px;
-    }
-    .perk-title {
-      font-family: var(--fh); font-size: 1.1rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.04em;
-      color: var(--navy); margin-bottom: 8px;
-    }
-    .perk-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
-
-    /* ── POSITIONS ── */
-    .positions-section {
-      padding: 90px 80px;
-      background: var(--white);
-      border-top: 1px solid var(--border);
-    }
-    .positions-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 24px; margin-top: 52px;
-    }
-    .position-card {
-      border: 1px solid var(--border);
-      padding: 36px 32px;
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-      cursor: pointer;
-    }
-    .position-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--navy), var(--cyan));
-      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
-    }
-    .position-card:hover {
-      border-color: rgba(0,168,216,0.35);
-      box-shadow: 0 8px 32px rgba(26,43,109,0.1);
-      transform: translateY(-3px);
-    }
-    .position-card:hover::before { transform: scaleX(1); }
-    .position-card.active {
-      border-color: var(--cyan);
-      box-shadow: 0 8px 32px rgba(0,168,216,0.15);
-    }
-    .position-card.active::before { transform: scaleX(1); }
-    .position-tag {
-      display: inline-block;
-      font-family: var(--fh); font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--cyan); background: rgba(0,168,216,0.1);
-      border: 1px solid rgba(0,168,216,0.25);
-      padding: 4px 12px; margin-bottom: 14px;
-    }
-    .position-title {
-      font-family: var(--fh); font-size: 1.6rem; font-weight: 900;
-      text-transform: uppercase; color: var(--navy); margin-bottom: 10px;
-    }
-    .position-desc {
-      font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px;
-    }
-    .position-details {
-      display: flex; flex-wrap: wrap; gap: 10px;
-    }
-    .position-detail {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.82rem; color: var(--muted);
-      font-family: var(--fh); font-weight: 600;
-      letter-spacing: 0.05em; text-transform: uppercase;
-    }
-    .position-detail svg { flex-shrink: 0; }
-    .position-apply-btn {
-      display: inline-block; margin-top: 22px;
-      font-family: var(--fh); font-weight: 800; font-size: 0.88rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--navy); border-bottom: 2px solid var(--cyan);
-      padding-bottom: 2px; text-decoration: none;
-      transition: color 0.2s;
-    }
-    .position-apply-btn:hover { color: var(--cyan); }
-
-    /* ── APPLICATION FORM ── */
-    .apply-section {
-      background: var(--off);
-      border-top: 1px solid var(--border);
-      padding: 90px 80px;
-    }
-    .apply-inner {
-      display: grid; grid-template-columns: 1fr 1.8fr;
-      gap: 80px; align-items: start;
-    }
-    .apply-info .s-title { margin-bottom: 16px; }
-    .apply-info-desc {
-      font-size: 0.98rem; color: var(--muted); line-height: 1.75; margin-bottom: 32px;
-    }
-    .apply-checklist { display: flex; flex-direction: column; gap: 14px; }
-    .apply-check-item { display: flex; align-items: flex-start; gap: 12px; }
-    .apply-check-icon {
-      width: 22px; height: 22px; flex-shrink: 0;
-      background: rgba(0,168,216,0.1); border: 1.5px solid rgba(0,168,216,0.35);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      margin-top: 1px;
-    }
-    .apply-check-text { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
-    .apply-check-text strong {
-      display: block; font-family: var(--fh); font-weight: 700;
-      font-size: 0.9rem; color: var(--navy); margin-bottom: 1px;
-    }
-
-    /* Form */
-    .apply-form { display: flex; flex-direction: column; gap: 18px; }
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .fg { display: flex; flex-direction: column; gap: 6px; }
-    .fl {
-      font-family: var(--fh); font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
-    }
-    .fl .req { color: var(--cyan); margin-left: 2px; }
-    .fi, .fs, .ft {
-      background: var(--white); border: 1.5px solid var(--border);
-      color: var(--text); font-family: var(--fb); font-size: 0.92rem;
-      padding: 13px 16px; outline: none; transition: border-color 0.2s; width: 100%;
-    }
-    .fi:focus, .fs:focus, .ft:focus { border-color: var(--cyan); }
-    .ft { resize: vertical; min-height: 100px; }
-    .fs option { background: var(--white); }
-
-    /* File upload */
-    .file-upload-wrap { position: relative; }
-    .file-upload-input {
-      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-    }
-    .file-upload-box {
-      background: var(--white); border: 1.5px dashed var(--border);
-      padding: 18px 20px; display: flex; align-items: center; gap: 14px;
-      transition: border-color 0.2s, background 0.2s; cursor: pointer;
-    }
-    .file-upload-box:hover { border-color: var(--cyan); background: rgba(0,168,216,0.03); }
-    .file-upload-box.has-file { border-color: var(--cyan); border-style: solid; background: rgba(0,168,216,0.04); }
-    .file-upload-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      background: rgba(0,168,216,0.1); border: 1px solid rgba(0,168,216,0.25);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .file-upload-label { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
-    .file-upload-label strong {
-      display: block; font-family: var(--fh); font-weight: 700;
-      font-size: 0.9rem; color: var(--navy); margin-bottom: 2px;
-    }
-    .file-upload-name { font-size: 0.82rem; color: var(--cyan); margin-top: 2px; }
-
-    /* Status */
-    #apply-error {
-      display: none; background: #fef2f2; border: 1px solid #fca5a5;
-      color: #991b1b; padding: 12px 16px; font-size: 0.88rem;
-    }
-    #apply-success {
-      display: none; background: #f0fdf4; border: 1px solid #86efac;
-      color: #166534; padding: 16px 20px; font-size: 0.95rem; line-height: 1.6;
-    }
-
-    .fsub {
-      background: var(--navy); color: #fff;
-      font-family: var(--fh); font-weight: 800; font-size: 1rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 17px 40px; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.2s; align-self: flex-start;
-    }
-    .fsub:hover { background: var(--blue); transform: translateY(-2px); }
-    .fsub:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) {
-      .perks-grid { grid-template-columns: 1fr 1fr; }
-      .positions-grid { grid-template-columns: 1fr; }
-      .apply-inner { grid-template-columns: 1fr; gap: 48px; }
-      .careers-hero-content { padding: 70px 40px; }
-      .perks-section, .positions-section, .apply-section { padding: 70px 40px; }
-    }
-    @media (max-width: 640px) {
-      .perks-grid { grid-template-columns: 1fr; }
-      .frow { grid-template-columns: 1fr; }
-      .careers-hero-content { padding: 60px 20px; }
-      .perks-section, .positions-section, .apply-section { padding: 60px 20px; }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers — CH Logistics</title>
+    <link rel="icon" type="image/x-icon" href="images/ch-logo-favi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="index.html">
-      <img class="nav-logo" src="images/ch-logo-t.png" alt="CH Logistics" />
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html#services">Services</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#coverage">Coverage</a></li>
-      <li><a href="index.html#why">Why Us</a></li>
-      <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section class="careers-hero">
-    <div class="careers-hero-photo"></div>
-    <div class="careers-hero-overlay"></div>
-    <div class="careers-hero-content fade-up">
-      <div class="hero-eyebrow">Join the Team &mdash; Burlington, Ontario</div>
-      <h1 class="careers-hero-title">Drive Your<br><span>Career</span><br>Forward</h1>
-      <p class="careers-hero-desc">
-        We&rsquo;re always looking for experienced, reliable drivers and owner operators to grow with us.
-        Competitive pay, consistent miles, and a team that has your back.
-      </p>
-    </div>
-  </section>
-
-  <!-- PERKS -->
-  <section class="perks-section">
-    <div class="fade-up">
-      <div class="s-label">Why CH Logistics</div>
-      <h2 class="s-title">Built for Drivers,<br>by Drivers</h2>
-    </div>
-    <div class="perks-grid">
-      <div class="perk-item fade-up">
-        <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
-          <rect x="3" y="8" width="36" height="26" rx="3" stroke="#1a2b6d" stroke-width="2"/>
-          <path d="M3 16h36" stroke="#1a2b6d" stroke-width="1.5"/>
-          <path d="M12 25h6M22 25h8" stroke="#00a8d8" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <div class="perk-title">Competitive Pay</div>
-        <p class="perk-desc">Top market rates with consistent, predictable miles across Canada and the U.S.</p>
-      </div>
-      <div class="perk-item fade-up" style="transition-delay:0.08s">
-        <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
-          <circle cx="21" cy="21" r="16" stroke="#1a2b6d" stroke-width="2"/>
-          <path d="M21 12v9l6 3" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="perk-title">Home Time</div>
-        <p class="perk-desc">We respect your time at home. Predictable schedules with routes that make sense.</p>
-      </div>
-      <div class="perk-item fade-up" style="transition-delay:0.16s">
-        <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
-          <rect x="5" y="14" width="24" height="18" rx="2" stroke="#1a2b6d" stroke-width="2"/>
-          <rect x="29" y="20" width="10" height="12" rx="2" stroke="#00a8d8" stroke-width="2"/>
-          <circle cx="11" cy="34" r="4" stroke="#1a2b6d" stroke-width="2"/>
-          <circle cx="33" cy="34" r="4" stroke="#00a8d8" stroke-width="2"/>
-        </svg>
-        <div class="perk-title">Modern Equipment</div>
-        <p class="perk-desc">Late-model Volvo tractors, well-maintained and fully equipped — no surprises on the road.</p>
-      </div>
-      <div class="perk-item fade-up" style="transition-delay:0.24s">
-        <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
-          <circle cx="15" cy="16" r="7" stroke="#1a2b6d" stroke-width="2"/>
-          <circle cx="29" cy="16" r="7" stroke="#1a2b6d" stroke-width="2"/>
-          <path d="M3 36c0-6.627 5.373-10 12-10s12 3.373 12 10" stroke="#00a8d8" stroke-width="2" stroke-linecap="round"/>
-          <path d="M29 26c4 0 10 2 10 10" stroke="#00a8d8" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <div class="perk-title">Dispatcher Support</div>
-        <p class="perk-desc">24/7 dispatch team behind you. We handle the back office so you can focus on the road.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPEN POSITIONS -->
-  <section class="positions-section">
-    <div class="fade-up">
-      <div class="s-label">Open Positions</div>
-      <h2 class="s-title">We&rsquo;re Hiring</h2>
-    </div>
-    <div class="positions-grid">
-
-      <div class="position-card fade-up" id="card-az" onclick="selectPosition('AZ/Class 1 Driver')">
-        <div class="position-tag">Full-Time &middot; Burlington, ON</div>
-        <div class="position-title">AZ / Class 1<br>Driver</div>
-        <p class="position-desc">
-          Operating 53&prime; dry and reefer trailers on cross-border and domestic lanes. You bring the licence
-          and the attitude — we&rsquo;ll handle the rest.
-        </p>
-        <div class="position-details">
-          <div class="position-detail">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 117 5a1.5 1.5 0 010 3z" fill="#6b7a99"/></svg>
-            Burlington, ON
-          </div>
-          <div class="position-detail">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1" stroke="#6b7a99" stroke-width="1.2"/><path d="M1 6l6 4 6-4" stroke="#6b7a99" stroke-width="1.2"/></svg>
-            AZ / Class 1 Required
-          </div>
-          <div class="position-detail">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6b7a99" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6b7a99" stroke-width="1.2" stroke-linecap="round"/></svg>
-            Canada &amp; USA Lanes
-          </div>
-        </div>
-        <span class="position-apply-btn">Apply for this role &rarr;</span>
-      </div>
-
-      <div class="position-card fade-up" id="card-oo" style="transition-delay:0.1s" onclick="selectPosition('Owner Operator')">
-        <div class="position-tag">Contract &middot; Burlington, ON</div>
-        <div class="position-title">Owner<br>Operator</div>
-        <p class="position-desc">
-          Partner with us and run under the CH Logistics authority. We offer consistent freight,
-          fuel advances, and a team that treats you like a partner — not a number.
-        </p>
-        <div class="position-details">
-          <div class="position-detail">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 117 5a1.5 1.5 0 010 3z" fill="#6b7a99"/></svg>
-            Burlington, ON
-          </div>
-          <div class="position-detail">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1" stroke="#6b7a99" stroke-width="1.2"/><path d="M1 6l6 4 6-4" stroke="#6b7a99" stroke-width="1.2"/></svg>
-            Own Unit Required
-          </div>
-          <div class="position-detail">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6b7a99" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6b7a99" stroke-width="1.2" stroke-linecap="round"/></svg>
-            Canada &amp; USA Lanes
-          </div>
-        </div>
-        <span class="position-apply-btn">Apply for this role &rarr;</span>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- APPLICATION FORM -->
-  <section class="apply-section" id="apply">
-    <div class="apply-inner">
-
-      <div class="apply-info fade-up">
-        <div class="s-label">Apply Now</div>
-        <h2 class="s-title">Submit Your<br>Application</h2>
-        <p class="apply-info-desc">
-          Fill out the form and we&rsquo;ll be in touch within 2 business days.
-          Questions? Call us at <a href="tel:+19057961062" style="color:var(--cyan);text-decoration:none;">+1 (905) 796-1062</a>.
-        </p>
-        <div class="apply-checklist">
-          <div class="apply-check-item">
-            <div class="apply-check-icon">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="apply-check-text"><strong>Resume</strong>PDF or Word document</div>
-          </div>
-          <div class="apply-check-item">
-            <div class="apply-check-icon">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="apply-check-text"><strong>Driving Abstract</strong>Recent copy (within 90 days)</div>
-          </div>
-          <div class="apply-check-item">
-            <div class="apply-check-icon">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="apply-check-text"><strong>Licence / CVOR Number</strong>Required for all applicants</div>
-          </div>
-          <div class="apply-check-item">
-            <div class="apply-check-icon">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="apply-check-text"><strong>Phone Number</strong>Best number to reach you</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="apply-form fade-up" style="transition-delay:0.15s">
-
-        <!-- Position selector -->
-        <div class="fg">
-          <label class="fl" for="a-position">Applying For <span class="req">*</span></label>
-          <select id="a-position" class="fs">
-            <option value="">Select a position...</option>
-            <option value="AZ/Class 1 Driver">AZ / Class 1 Driver</option>
-            <option value="Owner Operator">Owner Operator</option>
-          </select>
-        </div>
-
-        <div class="frow">
-          <div class="fg">
-            <label class="fl" for="a-fname">First Name <span class="req">*</span></label>
-            <input id="a-fname" type="text" class="fi" placeholder="John" />
-          </div>
-          <div class="fg">
-            <label class="fl" for="a-lname">Last Name <span class="req">*</span></label>
-            <input id="a-lname" type="text" class="fi" placeholder="Smith" />
-          </div>
-        </div>
-
-        <div class="frow">
-          <div class="fg">
-            <label class="fl" for="a-email">Email Address <span class="req">*</span></label>
-            <input id="a-email" type="email" class="fi" placeholder="john@email.com" />
-          </div>
-          <div class="fg">
-            <label class="fl" for="a-phone">Phone Number <span class="req">*</span></label>
-            <input id="a-phone" type="tel" class="fi" placeholder="+1 (905) 555-0100" />
-          </div>
-        </div>
-
-        <div class="fg">
-          <label class="fl" for="a-license">Licence / CVOR Number <span class="req">*</span></label>
-          <input id="a-license" type="text" class="fi" placeholder="e.g. A1234567 / 123456" />
-        </div>
-
-        <!-- Resume upload -->
-        <div class="fg">
-          <label class="fl">Resume <span class="req">*</span></label>
-          <div class="file-upload-wrap">
-            <input type="file" class="file-upload-input" id="a-resume" accept=".pdf,.doc,.docx" />
-            <div class="file-upload-box" id="resume-box">
-              <div class="file-upload-icon">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10M5 6l4-4 4 4" stroke="#00a8d8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13v1a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="#00a8d8" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </div>
-              <div class="file-upload-label">
-                <strong>Upload Resume</strong>
-                PDF, DOC, or DOCX &middot; Max 5MB
-                <div class="file-upload-name" id="resume-name"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Driving abstract upload -->
-        <div class="fg">
-          <label class="fl">Driving Abstract <span class="req">*</span></label>
-          <div class="file-upload-wrap">
-            <input type="file" class="file-upload-input" id="a-abstract" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
-            <div class="file-upload-box" id="abstract-box">
-              <div class="file-upload-icon">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10M5 6l4-4 4 4" stroke="#00a8d8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13v1a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="#00a8d8" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </div>
-              <div class="file-upload-label">
-                <strong>Upload Driving Abstract</strong>
-                PDF, image, or DOC &middot; Max 5MB &middot; Within 90 days
-                <div class="file-upload-name" id="abstract-name"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="fg">
-          <label class="fl" for="a-notes">Additional Notes</label>
-          <textarea id="a-notes" class="ft" placeholder="Years of experience, current equipment, availability, anything else we should know..."></textarea>
-        </div>
-
-        <div id="apply-error"></div>
-        <div id="apply-success">
-          <strong style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:0.05em; margin-bottom:4px;">Application Received ✓</strong>
-          Thanks for applying! We&rsquo;ll review your application and be in touch within 2 business days.
-        </div>
-
-        <button id="a-submit" class="fsub">Submit Application &rarr;</button>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="ft-top">
-      <div>
-        <img src="images/ch-logo-white.png" alt="CH Logistics" class="ft-logo" />
-        <p class="ft-desc">Burlington-based carrier moving freight across Canada and the United States.<br>Moving You Forward&hellip;</p>
-      </div>
-      <div>
-        <div class="ft-col-title">Services</div>
-        <ul class="ft-links">
-          <li><a href="index.html#services">Full Truckload</a></li>
-          <li><a href="index.html#services">LTL Shipping</a></li>
-          <li><a href="index.html#services">Cross-Border</a></li>
-          <li><a href="index.html#services">Dedicated Fleet</a></li>
-          <li><a href="index.html#services">Temperature-Controlled</a></li>
+    <!-- NAV -->
+    <nav>
+        <a href="index.html">
+            <img class="nav-logo" src="images/ch-logo-t.png" alt="CH Logistics" />
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="index.html#why">Why Us</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
         </ul>
-      </div>
-      <div>
-        <div class="ft-col-title">Company</div>
-        <ul class="ft-links">
-          <li><a href="index.html#about">About Us</a></li>
-          <li><a href="index.html#why">Why CH Logistics</a></li>
-          <li><a href="index.html#coverage">Coverage Map</a></li>
-          <li><a href="careers.html">Careers</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ft-col-title">Contact</div>
-        <ul class="ft-links">
-          <li><a href="tel:+19057961062">+1 (905) 796-1062</a></li>
-          <li><a href="mailto:dispatch@chlogistic.ca">dispatch@chlogistic.ca</a></li>
-          <li><a href="index.html#contact">Get a Quote</a></li>
-          <li><a href="careers.html">Join the Team</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="ft-bot">
-      <span class="ft-copy">&copy; 2025 CH Logistics Inc. All rights reserved. Burlington, Ontario, Canada.</span>
-      <span class="ft-tag">Moving You Forward&hellip;</span>
-    </div>
-  </footer>
+    </nav>
 
-  <script>
-    // ── POSITION CARD CLICK → PRE-SELECT DROPDOWN ──────────────
-    function selectPosition(pos) {
-      document.getElementById('a-position').value = pos;
-      // Highlight active card
-      document.querySelectorAll('.position-card').forEach(c => c.classList.remove('active'));
-      const map = { 'AZ/Class 1 Driver': 'card-az', 'Owner Operator': 'card-oo' };
-      if (map[pos]) document.getElementById(map[pos]).classList.add('active');
-      // Scroll to form
-      document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
-    }
+    <!-- HERO -->
+    <section class="careers-hero">
+        <div class="careers-hero-photo"></div>
+        <div class="careers-hero-overlay"></div>
+        <div class="careers-hero-content fade-up">
+            <div class="hero-eyebrow">Join the Team &mdash; Burlington, Ontario</div>
+            <h1 class="careers-hero-title">Drive Your<br><span>Career</span><br>Forward</h1>
+            <p class="careers-hero-desc">
+                We&rsquo;re always looking for experienced, reliable drivers and owner operators to grow with us.
+                Competitive pay, consistent miles, and a team that has your back.
+            </p>
+        </div>
+    </section>
 
-    // ── FILE INPUT LABELS ───────────────────────────────────────
-    function setupFileInput(inputId, boxId, nameId) {
-      const input = document.getElementById(inputId);
-      const box   = document.getElementById(boxId);
-      const name  = document.getElementById(nameId);
-      input.addEventListener('change', () => {
-        if (input.files[0]) {
-          box.classList.add('has-file');
-          name.textContent = input.files[0].name;
-        } else {
-          box.classList.remove('has-file');
-          name.textContent = '';
+    <!-- PERKS -->
+    <section class="perks-section">
+        <div class="fade-up">
+            <div class="s-label">Why CH Logistics</div>
+            <h2 class="s-title">Built for Drivers,<br>by Drivers</h2>
+        </div>
+        <div class="perks-grid">
+            <div class="perk-item fade-up">
+                <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
+                    <rect x="3" y="8" width="36" height="26" rx="3" stroke="#1a2b6d" stroke-width="2" />
+                    <path d="M3 16h36" stroke="#1a2b6d" stroke-width="1.5" />
+                    <path d="M12 25h6M22 25h8" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <div class="perk-title">Competitive Pay</div>
+                <p class="perk-desc">Top market rates with consistent, predictable miles across Canada and the U.S.</p>
+            </div>
+            <div class="perk-item fade-up" style="transition-delay:0.08s">
+                <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
+                    <circle cx="21" cy="21" r="16" stroke="#1a2b6d" stroke-width="2" />
+                    <path d="M21 12v9l6 3" stroke="#00a8d8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <div class="perk-title">Home Time</div>
+                <p class="perk-desc">We respect your time at home. Predictable schedules with routes that make sense.
+                </p>
+            </div>
+            <div class="perk-item fade-up" style="transition-delay:0.16s">
+                <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
+                    <rect x="5" y="14" width="24" height="18" rx="2" stroke="#1a2b6d" stroke-width="2" />
+                    <rect x="29" y="20" width="10" height="12" rx="2" stroke="#00a8d8" stroke-width="2" />
+                    <circle cx="11" cy="34" r="4" stroke="#1a2b6d" stroke-width="2" />
+                    <circle cx="33" cy="34" r="4" stroke="#00a8d8" stroke-width="2" />
+                </svg>
+                <div class="perk-title">Modern Equipment</div>
+                <p class="perk-desc">Late-model Volvo tractors, well-maintained and fully equipped — no surprises on the
+                    road.</p>
+            </div>
+            <div class="perk-item fade-up" style="transition-delay:0.24s">
+                <svg class="perk-icon" viewBox="0 0 42 42" fill="none">
+                    <circle cx="15" cy="16" r="7" stroke="#1a2b6d" stroke-width="2" />
+                    <circle cx="29" cy="16" r="7" stroke="#1a2b6d" stroke-width="2" />
+                    <path d="M3 36c0-6.627 5.373-10 12-10s12 3.373 12 10" stroke="#00a8d8" stroke-width="2"
+                        stroke-linecap="round" />
+                    <path d="M29 26c4 0 10 2 10 10" stroke="#00a8d8" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <div class="perk-title">Dispatcher Support</div>
+                <p class="perk-desc">24/7 dispatch team behind you. We handle the back office so you can focus on the
+                    road.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPEN POSITIONS -->
+    <section class="positions-section">
+        <div class="fade-up">
+            <div class="s-label">Open Positions</div>
+            <h2 class="s-title">We&rsquo;re Hiring</h2>
+        </div>
+        <div class="positions-grid">
+
+            <div class="position-card fade-up" id="card-az" onclick="selectPosition('AZ/Class 1 Driver')">
+                <div class="position-tag">Full-Time &middot; Burlington, ON</div>
+                <div class="position-title">AZ / Class 1<br>Driver</div>
+                <p class="position-desc">
+                    Operating 53&prime; dry and reefer trailers on cross-border and domestic lanes. You bring the
+                    licence
+                    and the attitude — we&rsquo;ll handle the rest.
+                </p>
+                <div class="position-details">
+                    <div class="position-detail">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path
+                                d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 117 5a1.5 1.5 0 010 3z"
+                                fill="#6b7a99" />
+                        </svg>
+                        Burlington, ON
+                    </div>
+                    <div class="position-detail">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <rect x="1" y="3" width="12" height="9" rx="1" stroke="#6b7a99" stroke-width="1.2" />
+                            <path d="M1 6l6 4 6-4" stroke="#6b7a99" stroke-width="1.2" />
+                        </svg>
+                        AZ / Class 1 Required
+                    </div>
+                    <div class="position-detail">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <circle cx="7" cy="7" r="5.5" stroke="#6b7a99" stroke-width="1.2" />
+                            <path d="M7 4v3l2 1.5" stroke="#6b7a99" stroke-width="1.2" stroke-linecap="round" />
+                        </svg>
+                        Canada &amp; USA Lanes
+                    </div>
+                </div>
+                <span class="position-apply-btn">Apply for this role &rarr;</span>
+            </div>
+
+            <div class="position-card fade-up" id="card-oo" style="transition-delay:0.1s"
+                onclick="selectPosition('Owner Operator')">
+                <div class="position-tag">Contract &middot; Burlington, ON</div>
+                <div class="position-title">Owner<br>Operator</div>
+                <p class="position-desc">
+                    Partner with us and run under the CH Logistics authority. We offer consistent freight,
+                    fuel advances, and a team that treats you like a partner — not a number.
+                </p>
+                <div class="position-details">
+                    <div class="position-detail">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path
+                                d="M7 1C4.24 1 2 3.24 2 6c0 3.5 5 7 5 7s5-3.5 5-7c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 117 5a1.5 1.5 0 010 3z"
+                                fill="#6b7a99" />
+                        </svg>
+                        Burlington, ON
+                    </div>
+                    <div class="position-detail">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <rect x="1" y="3" width="12" height="9" rx="1" stroke="#6b7a99" stroke-width="1.2" />
+                            <path d="M1 6l6 4 6-4" stroke="#6b7a99" stroke-width="1.2" />
+                        </svg>
+                        Own Unit Required
+                    </div>
+                    <div class="position-detail">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <circle cx="7" cy="7" r="5.5" stroke="#6b7a99" stroke-width="1.2" />
+                            <path d="M7 4v3l2 1.5" stroke="#6b7a99" stroke-width="1.2" stroke-linecap="round" />
+                        </svg>
+                        Canada &amp; USA Lanes
+                    </div>
+                </div>
+                <span class="position-apply-btn">Apply for this role &rarr;</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section class="apply-section" id="apply">
+        <div class="apply-inner">
+
+            <div class="apply-info fade-up">
+                <div class="s-label">Apply Now</div>
+                <h2 class="s-title">Submit Your<br>Application</h2>
+                <p class="apply-info-desc">
+                    Fill out the form and we&rsquo;ll be in touch within 2 business days.
+                    Questions? Call us at <a href="tel:+19057961062" style="color:var(--cyan);text-decoration:none;">+1
+                        (905) 796-1062</a>.
+                </p>
+                <div class="apply-checklist">
+                    <div class="apply-check-item">
+                        <div class="apply-check-icon">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="apply-check-text"><strong>Resume</strong>PDF or Word document</div>
+                    </div>
+                    <div class="apply-check-item">
+                        <div class="apply-check-icon">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="apply-check-text"><strong>Driving Abstract</strong>Recent copy (within 90 days)
+                        </div>
+                    </div>
+                    <div class="apply-check-item">
+                        <div class="apply-check-icon">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="apply-check-text"><strong>Licence / CVOR Number</strong>Required for all applicants
+                        </div>
+                    </div>
+                    <div class="apply-check-item">
+                        <div class="apply-check-icon">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2 6l3 3 5-5" stroke="#00a8d8" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="apply-check-text"><strong>Phone Number</strong>Best number to reach you</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-form fade-up" style="transition-delay:0.15s">
+
+                <!-- Position selector -->
+                <div class="fg">
+                    <label class="fl" for="a-position">Applying For <span class="req">*</span></label>
+                    <select id="a-position" class="fs">
+                        <option value="">Select a position...</option>
+                        <option value="AZ/Class 1 Driver">AZ / Class 1 Driver</option>
+                        <option value="Owner Operator">Owner Operator</option>
+                    </select>
+                </div>
+
+                <div class="frow">
+                    <div class="fg">
+                        <label class="fl" for="a-fname">First Name <span class="req">*</span></label>
+                        <input id="a-fname" type="text" class="fi" placeholder="John" />
+                    </div>
+                    <div class="fg">
+                        <label class="fl" for="a-lname">Last Name <span class="req">*</span></label>
+                        <input id="a-lname" type="text" class="fi" placeholder="Smith" />
+                    </div>
+                </div>
+
+                <div class="frow">
+                    <div class="fg">
+                        <label class="fl" for="a-email">Email Address <span class="req">*</span></label>
+                        <input id="a-email" type="email" class="fi" placeholder="john@email.com" />
+                    </div>
+                    <div class="fg">
+                        <label class="fl" for="a-phone">Phone Number <span class="req">*</span></label>
+                        <input id="a-phone" type="tel" class="fi" placeholder="+1 (905) 555-0100" />
+                    </div>
+                </div>
+
+                <div class="fg">
+                    <label class="fl" for="a-license">Licence / CVOR Number <span class="req">*</span></label>
+                    <input id="a-license" type="text" class="fi" placeholder="e.g. A1234567 / 123456" />
+                </div>
+
+                <!-- Resume upload -->
+                <div class="fg">
+                    <label class="fl">Resume <span class="req">*</span></label>
+                    <div class="file-upload-wrap">
+                        <input type="file" class="file-upload-input" id="a-resume" accept=".pdf,.doc,.docx" />
+                        <div class="file-upload-box" id="resume-box">
+                            <div class="file-upload-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <path d="M9 2v10M5 6l4-4 4 4" stroke="#00a8d8" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M2 13v1a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="#00a8d8" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <div class="file-upload-label">
+                                <strong>Upload Resume</strong>
+                                PDF, DOC, or DOCX &middot; Max 5MB
+                                <div class="file-upload-name" id="resume-name"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Driving abstract upload -->
+                <div class="fg">
+                    <label class="fl">Driving Abstract <span class="req">*</span></label>
+                    <div class="file-upload-wrap">
+                        <input type="file" class="file-upload-input" id="a-abstract"
+                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
+                        <div class="file-upload-box" id="abstract-box">
+                            <div class="file-upload-icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <path d="M9 2v10M5 6l4-4 4 4" stroke="#00a8d8" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M2 13v1a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="#00a8d8" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <div class="file-upload-label">
+                                <strong>Upload Driving Abstract</strong>
+                                PDF, image, or DOC &middot; Max 5MB &middot; Within 90 days
+                                <div class="file-upload-name" id="abstract-name"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fg">
+                    <label class="fl" for="a-notes">Additional Notes</label>
+                    <textarea id="a-notes" class="ft"
+                        placeholder="Years of experience, current equipment, availability, anything else we should know..."></textarea>
+                </div>
+
+                <div id="apply-error"></div>
+                <div id="apply-success">
+                    <strong
+                        style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:0.05em; margin-bottom:4px;">Application
+                        Received ✓</strong>
+                    Thanks for applying! We&rsquo;ll review your application and be in touch within 2 business days.
+                </div>
+
+                <button id="a-submit" class="fsub">Submit Application &rarr;</button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="ft-top">
+            <div>
+                <img src="images/ch-logo-white.png" alt="CH Logistics" class="ft-logo" />
+                <p class="ft-desc">Burlington-based carrier moving freight across Canada and the United
+                    States.<br>Moving You Forward&hellip;</p>
+            </div>
+            <div>
+                <div class="ft-col-title">Services</div>
+                <ul class="ft-links">
+                    <li><a href="index.html#services">Full Truckload</a></li>
+                    <li><a href="index.html#services">LTL Shipping</a></li>
+                    <li><a href="index.html#services">Cross-Border</a></li>
+                    <li><a href="index.html#services">Dedicated Fleet</a></li>
+                    <li><a href="index.html#services">Temperature-Controlled</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="ft-col-title">Company</div>
+                <ul class="ft-links">
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#why">Why CH Logistics</a></li>
+                    <li><a href="index.html#coverage">Coverage Map</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="ft-col-title">Contact</div>
+                <ul class="ft-links">
+                    <li><a href="tel:+19057961062">+1 (905) 796-1062</a></li>
+                    <li><a href="mailto:dispatch@chlogistic.ca">dispatch@chlogistic.ca</a></li>
+                    <li><a href="index.html#contact">Get a Quote</a></li>
+                    <li><a href="careers.html">Join the Team</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="ft-bot">
+            <span class="ft-copy">&copy; 2025 CH Logistics Inc. All rights reserved. Burlington, Ontario, Canada.</span>
+            <span class="ft-tag">Moving You Forward&hellip;</span>
+        </div>
+    </footer>
+
+    <script>
+        // ── POSITION CARD CLICK → PRE-SELECT DROPDOWN ──────────────
+        function selectPosition(pos) {
+            document.getElementById('a-position').value = pos;
+            // Highlight active card
+            document.querySelectorAll('.position-card').forEach(c => c.classList.remove('active'));
+            const map = { 'AZ/Class 1 Driver': 'card-az', 'Owner Operator': 'card-oo' };
+            if (map[pos]) document.getElementById(map[pos]).classList.add('active');
+            // Scroll to form
+            document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
         }
-      });
-    }
-    setupFileInput('a-resume',   'resume-box',   'resume-name');
-    setupFileInput('a-abstract', 'abstract-box', 'abstract-name');
 
-    // ── FILE → BASE64 ───────────────────────────────────────────
-    function fileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload  = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
+        // ── FILE INPUT LABELS ───────────────────────────────────────
+        function setupFileInput(inputId, boxId, nameId) {
+            const input = document.getElementById(inputId);
+            const box = document.getElementById(boxId);
+            const name = document.getElementById(nameId);
+            input.addEventListener('change', () => {
+                if (input.files[0]) {
+                    box.classList.add('has-file');
+                    name.textContent = input.files[0].name;
+                } else {
+                    box.classList.remove('has-file');
+                    name.textContent = '';
+                }
+            });
+        }
+        setupFileInput('a-resume', 'resume-box', 'resume-name');
+        setupFileInput('a-abstract', 'abstract-box', 'abstract-name');
 
-    // ── SUBMIT ──────────────────────────────────────────────────
-    document.getElementById('a-submit').addEventListener('click', async () => {
-      const btn        = document.getElementById('a-submit');
-      const errBox     = document.getElementById('apply-error');
-      const successBox = document.getElementById('apply-success');
+        // ── FILE → BASE64 ───────────────────────────────────────────
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
 
-      const position = document.getElementById('a-position').value;
-      const firstName = document.getElementById('a-fname').value.trim();
-      const lastName  = document.getElementById('a-lname').value.trim();
-      const email     = document.getElementById('a-email').value.trim();
-      const phone     = document.getElementById('a-phone').value.trim();
-      const license   = document.getElementById('a-license').value.trim();
-      const notes     = document.getElementById('a-notes').value.trim();
-      const resumeFile   = document.getElementById('a-resume').files[0];
-      const abstractFile = document.getElementById('a-abstract').files[0];
+        // ── SUBMIT ──────────────────────────────────────────────────
+        document.getElementById('a-submit').addEventListener('click', async () => {
+            const btn = document.getElementById('a-submit');
+            const errBox = document.getElementById('apply-error');
+            const successBox = document.getElementById('apply-success');
 
-      // Reset
-      errBox.style.display = 'none';
-      successBox.style.display = 'none';
+            const position = document.getElementById('a-position').value;
+            const firstName = document.getElementById('a-fname').value.trim();
+            const lastName = document.getElementById('a-lname').value.trim();
+            const email = document.getElementById('a-email').value.trim();
+            const phone = document.getElementById('a-phone').value.trim();
+            const license = document.getElementById('a-license').value.trim();
+            const notes = document.getElementById('a-notes').value.trim();
+            const resumeFile = document.getElementById('a-resume').files[0];
+            const abstractFile = document.getElementById('a-abstract').files[0];
 
-      // Validate
-      if (!position || !firstName || !lastName || !email || !phone || !license) {
-        errBox.textContent = 'Please fill in all required fields.';
-        errBox.style.display = 'block';
-        return;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errBox.textContent = 'Please enter a valid email address.';
-        errBox.style.display = 'block';
-        return;
-      }
-      if (!resumeFile) {
-        errBox.textContent = 'Please upload your resume.';
-        errBox.style.display = 'block';
-        return;
-      }
-      if (!abstractFile) {
-        errBox.textContent = 'Please upload your driving abstract.';
-        errBox.style.display = 'block';
-        return;
-      }
-      const maxSize = 5 * 1024 * 1024;
-      if (resumeFile.size > maxSize || abstractFile.size > maxSize) {
-        errBox.textContent = 'Files must be under 5MB each.';
-        errBox.style.display = 'block';
-        return;
-      }
+            // Reset
+            errBox.style.display = 'none';
+            successBox.style.display = 'none';
 
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
+            // Validate
+            if (!position || !firstName || !lastName || !email || !phone || !license) {
+                errBox.textContent = 'Please fill in all required fields.';
+                errBox.style.display = 'block';
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errBox.textContent = 'Please enter a valid email address.';
+                errBox.style.display = 'block';
+                return;
+            }
+            if (!resumeFile) {
+                errBox.textContent = 'Please upload your resume.';
+                errBox.style.display = 'block';
+                return;
+            }
+            if (!abstractFile) {
+                errBox.textContent = 'Please upload your driving abstract.';
+                errBox.style.display = 'block';
+                return;
+            }
+            const maxSize = 5 * 1024 * 1024;
+            if (resumeFile.size > maxSize || abstractFile.size > maxSize) {
+                errBox.textContent = 'Files must be under 5MB each.';
+                errBox.style.display = 'block';
+                return;
+            }
 
-      try {
-        const [resumeB64, abstractB64] = await Promise.all([
-          fileToBase64(resumeFile),
-          fileToBase64(abstractFile),
-        ]);
+            btn.disabled = true;
+            btn.textContent = 'Submitting…';
 
-        const res = await fetch('/api/apply', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            position, firstName, lastName, email, phone, license, notes,
-            resume:   { name: resumeFile.name,   type: resumeFile.type,   data: resumeB64 },
-            abstract: { name: abstractFile.name, type: abstractFile.type, data: abstractB64 },
-          }),
+            try {
+                const [resumeB64, abstractB64] = await Promise.all([
+                    fileToBase64(resumeFile),
+                    fileToBase64(abstractFile),
+                ]);
+
+                const res = await fetch('/api/apply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        position, firstName, lastName, email, phone, license, notes,
+                        resume: { name: resumeFile.name, type: resumeFile.type, data: resumeB64 },
+                        abstract: { name: abstractFile.name, type: abstractFile.type, data: abstractB64 },
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    successBox.style.display = 'block';
+                    btn.style.display = 'none';
+                    document.querySelectorAll('#a-position,#a-fname,#a-lname,#a-email,#a-phone,#a-license,#a-notes').forEach(el => el.value = '');
+                    document.getElementById('a-resume').value = '';
+                    document.getElementById('a-abstract').value = '';
+                    document.getElementById('resume-box').classList.remove('has-file');
+                    document.getElementById('abstract-box').classList.remove('has-file');
+                    document.getElementById('resume-name').textContent = '';
+                    document.getElementById('abstract-name').textContent = '';
+                } else {
+                    errBox.textContent = data.error || 'Something went wrong. Please try again or call us directly.';
+                    errBox.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Submit Application →';
+                }
+            } catch (err) {
+                errBox.textContent = 'Network error. Please check your connection and try again.';
+                errBox.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Submit Application →';
+            }
         });
 
-        const data = await res.json();
+        // ── SCROLL ANIMATIONS ───────────────────────────────────────
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+        document.querySelectorAll('.careers-hero .fade-up').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
 
-        if (res.ok && data.success) {
-          successBox.style.display = 'block';
-          btn.style.display = 'none';
-          document.querySelectorAll('#a-position,#a-fname,#a-lname,#a-email,#a-phone,#a-license,#a-notes').forEach(el => el.value = '');
-          document.getElementById('a-resume').value = '';
-          document.getElementById('a-abstract').value = '';
-          document.getElementById('resume-box').classList.remove('has-file');
-          document.getElementById('abstract-box').classList.remove('has-file');
-          document.getElementById('resume-name').textContent = '';
-          document.getElementById('abstract-name').textContent = '';
-        } else {
-          errBox.textContent = data.error || 'Something went wrong. Please try again or call us directly.';
-          errBox.style.display = 'block';
-          btn.disabled = false;
-          btn.textContent = 'Submit Application →';
-        }
-      } catch (err) {
-        errBox.textContent = 'Network error. Please check your connection and try again.';
-        errBox.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Submit Application →';
-      }
-    });
-
-    // ── SCROLL ANIMATIONS ───────────────────────────────────────
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-    document.querySelectorAll('.careers-hero .fade-up').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) t.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 
 </body>
+
 </html>
