@@ -14,18 +14,6 @@
 </head>
 
 <body>
-	<script>
-		const ham = document.getElementById('nav-ham');
-		const mobileNav = document.getElementById('nav-mobile');
-		ham.addEventListener('click', () => {
-			mobileNav.classList.toggle('open');
-		});
-		document.addEventListener('click', e => {
-			if (!ham.contains(e.target) && !mobileNav.contains(e.target)) {
-				mobileNav.classList.remove('open');
-			}
-		});
-	</script>
 	<!-- NAV -->
 	<nav>
 		<img class="nav-logo" src="images/ch-logo-t.png" alt="CH Logistics" class="ft-logo" />
