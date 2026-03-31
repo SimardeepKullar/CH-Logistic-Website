@@ -14,7 +14,18 @@
 </head>
 
 <body>
-
+    <script>
+		const ham = document.getElementById('nav-ham');
+		const mobileNav = document.getElementById('nav-mobile');
+		ham.addEventListener('click', () => {
+			mobileNav.classList.toggle('open');
+		});
+		document.addEventListener('click', e => {
+			if (!ham.contains(e.target) && !mobileNav.contains(e.target)) {
+				mobileNav.classList.remove('open');
+			}
+		});
+	</script>
     <!-- NAV -->
     <nav>
         <a class="nav-logo-container" href="index.html">
