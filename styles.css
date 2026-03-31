@@ -113,6 +113,61 @@ nav {
     background: var(--navy)
 }
 
+/* ── MOBILE NAV DRAWER ── */
+.nav-mobile {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px 24px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 0;
+}
+ 
+.nav-mobile.open {
+    display: flex;
+}
+ 
+.nav-mobile a {
+    font-family: var(--fh);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+}
+ 
+.nav-mobile a:last-child {
+    border-bottom: none;
+}
+ 
+.nav-mobile a:hover {
+    color: var(--navy);
+}
+ 
+.nav-mobile .nav-cta {
+    margin-top: 10px;
+    background: var(--cyan);
+    color: #fff !important;
+    text-align: center;
+    padding: 14px;
+    border-bottom: none;
+    border-radius: 0;
+}
+ 
+.nav-mobile .nav-cta:hover {
+    background: var(--cyan2);
+}
+
 /* ── HERO ── */
 #hero {
     min-height: 100vh;
@@ -773,7 +828,7 @@ section {
 }
 
 @media (max-width: 1100px) {
-    .coverage-inner {
+    #coverage-inner {
         grid-template-columns: 1fr;
         gap: 40px;
     }
